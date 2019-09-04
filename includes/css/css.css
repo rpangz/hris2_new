@@ -1,0 +1,382 @@
+@charset "utf-8";
+
+a {
+	color: #1b93df;
+}
+
+a:hover { 
+	color: #1b93df;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Menu Bar
+/*-----------------------------------------------------------------------------------*/
+#header {
+	top:-40px;
+	width:100%;	
+	background-position:center;  
+    position:fixed;  
+    border:1px solid #ccc;
+    padding: 0 0 0 0;
+	height:30px;
+	background-repeat:no-repeat;
+	background-color: #1b93df;
+    }
+
+    #header h1 {
+	width:100%;	
+	background-color: #1b93df;
+    padding: 0px;
+    font:20px "arial";
+    letter-spacing:0px;
+	height:30px;
+	text-align:center;
+	vertical-align:text-top;
+	color:#FFFFFF;
+	font-weight:bold;
+	letter-spacing:inherit;
+	
+	
+	}
+
+
+#top-navigation {
+	top:30px;
+	background: #1b93df;
+	border-bottom: 1px solid #0e82cb;
+	
+}
+
+.top-menu-left {
+    background: url("images/divider.png") no-repeat right top;
+
+}
+
+.top-menu-left li {
+	background: url("images/divider.png") no-repeat left top;
+}
+
+.top-menu-right {
+    background: url("images/divider.png") no-repeat right top;
+}
+
+.top-menu-right li {
+    background: url("images/divider.png") no-repeat left top;
+}
+
+.top-menu-left li.small-logo a {
+	background: #1b93df;
+}
+
+.top-menu-left li.small-logo a:hover {
+	color: #1b93df;
+}
+
+.top-menu-left li.small-logo a span.home-icon {
+	background: url("../images/home-icon.png") no-repeat;
+	
+}
+
+.top-menu-left li.small-logo a:hover span.home-icon {
+	background: url("../images/home-icon.png") no-repeat;
+	background-position: -16px 0;
+}
+
+.top-menu-left li.categories a span.categories-icon {
+	background: url("../images/categories-icon.png") no-repeat;
+}
+
+.top-menu-left li.categories a:hover span.categories-icon {
+    background: url("../images/categories-icon.png") no-repeat;
+	background-position: -13px 0;
+}
+
+#top-navigation .top-menu-left li.categories a:hover {
+	color: #1b93df;
+}
+
+#top-navigation .top-menu-left li .dropdown-menu.categories li a:hover {
+	color: #1b93df;
+}
+
+.top-menu-left li.hot-tags a span.tags-icon {
+    background: url("../images/tags-icon.png") no-repeat;
+}
+
+.top-menu-left li.hot-tags a:hover span.tags-icon {
+    background: url("../images/tags-icon.png") no-repeat;
+	background-position: -13px 0;
+}
+
+#top-navigation .top-menu-left li.hot-tags a:hover {
+	color: #1b93df;
+}
+
+#top-navigation .top-menu-left li .dropdown-menu.hot-tags ul li a {
+	background: #1b93df;
+}
+
+.top-menu-right li.search a span.search-icon {
+    background: url("../images/search-icon.png") no-repeat;
+}
+
+.top-menu-right li.search a:hover span.search-icon {
+    background: url("../images/search-icon.png") no-repeat;
+	background-position: -14px 0;
+}
+
+#top-navigation .top-menu-right li.search a:hover {
+	color: #1b93df;
+}
+
+.top-menu-right li.twitter a span.twitter-icon {
+    background: url("images/twitter-icon.png") no-repeat;
+}
+
+.top-menu-right li.twitter a:hover span.twitter-icon {
+    background: url("images/twitter-icon.png") no-repeat;
+	background-position: -16px 0;
+}
+
+#top-navigation .top-menu-right li.twitter a:hover {
+	color: #1b93df;
+}
+
+.top-menu-right li.share a span.share-icon {
+    background: url("../images/share-icon.png") no-repeat;
+}
+
+.top-menu-right li.share a:hover span.share-icon {
+    background: url("../images/share-icon.png") no-repeat;
+	background-position: -14px 0;
+}
+
+#top-navigation .top-menu-right li.share a:hover {
+	color: #1b93df;
+}
+
+.top-menu-right li.report a span.report-icon {
+    background: url("../images/report-icon.png") no-repeat;
+}
+
+.top-menu-right li.report a:hover span.report-icon {
+    background: url("../images/report-icon.png") no-repeat;
+	background-position: -14px 0;
+}
+
+#top-navigation .top-menu-right li.report a:hover {
+	color: #1b93df;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Random Article
+/*-----------------------------------------------------------------------------------*/
+
+
+#random-section .random-title h3 {
+	background: #1b93df;
+}
+
+#random-section .random-title {
+	background: url("images/random-arrow.png") no-repeat right top;
+}
+
+#random-section .random-article h4 a:hover {
+	color: #1b93df;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+	
+#random-section .random-article {
+    background: #1b93df;
+}
+
+}
+
+@media only screen and (max-width: 479px) {
+
+#random-section .random-article {
+    background: #1b93df;
+}
+
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+#random-section .random-article {
+    background: #1b93df;
+}
+
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Articles
+/*-----------------------------------------------------------------------------------*/
+
+.grid-big .hentry h2.post-title a:hover,
+.grid-small .hentry h2.post-title a:hover,
+.grid-big-second .hentry h2.post-title a:hover,
+.grid-small-second .hentry h2.post-title a:hover,
+.block .hentry .post-content-right h2.post-title a:hover,
+.widget .widget-tabs .widget-tab li h4 a:hover,
+.uxde_posts_widget .post-title a:hover, 
+.uxde_popular_widget .post-title a:hover,
+.block.loop-single .hentry .related-posts h4.related-article a:hover {
+	color: #1b93df;
+}
+
+.grid-big-second .hentry .meta-author a {
+    color: #1b93df;
+}
+
+.grid-big-second .hentry .meta-author a:hover {
+	color: #1b93df;
+}
+
+.grid-small-second .hentry .meta-author a {
+	color: #1b93df;
+}
+
+.grid-small-second .hentry .meta-author a:hover {
+	color: #1b93df;
+}
+
+.breadcrumbs a:hover {
+	color: #1b93df;
+}
+
+.block.loop-single .hentry .post-content .post-content-right .meta-info a, 
+.block.loop-single .hentry .post-content .post-content-right .meta-info a:hover {
+    color: #1b93df;
+}
+
+.block.loop-single .hentry .related-posts .meta-category a {
+	background: #1b93df;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Pagination
+/*-----------------------------------------------------------------------------------*/
+
+.pagination a, .pagination span {
+    background: #1b93df;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Widgets
+/*-----------------------------------------------------------------------------------*/
+
+
+.widget ul li a {
+    color: #1b93df;
+}
+
+.widget .widget-tabs ul.drop li.ui-tabs-active a {
+    color: #1b93df;
+}
+
+.widget .widget-tabs ul.drop li.ui-tabs-active a:hover {
+    color: #1b93df;
+}
+
+.widget .widget-tabs ul.drop li a:hover {
+	color: #1b93df;
+}
+
+
+#sidebar .uxde_categories_widget li:hover span {
+	background: #1b93df;
+}
+
+.uxde_tweet_widget ul li span a {
+    color: #1b93df;
+}
+
+#sidebar .widget_categories li a:hover, #sidebar .widget_archive li a:hover, #sidebar .widget_meta li a:hover, #sidebar .widget_pages li a:hover {
+	color: #1b93df;
+}
+
+#sidebar .uxde_newsletter_widget input[type="submit"] {
+	background: #1B93DF;
+}
+
+#sidebar .uxde_newsletter_widget input[type="submit"]:hover {
+	background: #0E82CB;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Comments
+/*-----------------------------------------------------------------------------------*/
+
+
+a.comment-reply-link {
+    color: #1b93df;
+}
+
+#respond #submit {
+    background: #1b93df;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Footer 
+/*-----------------------------------------------------------------------------------*/
+
+
+.footer-widgets .uxde_newsletter_widget input[type="submit"] {
+	background: #1B93DF;
+	box-shadow: none;
+}
+
+.footer-widgets .uxde_newsletter_widget input[type="submit"]:hover {
+	background: #0E82CB;
+}
+
+#copyright-nav ul li a {
+    color: #1b93df;
+}
+
+#back-top span {
+    background: url("../images/back-top7.png") no-repeat;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Page Templates
+/*-----------------------------------------------------------------------------------*/
+
+
+.archive-lists .archives ul li:hover span {
+	background: #1b93df;
+}
+
+.archive-lists .categories ul li:hover span {
+	background: #1b93df;
+}
+
+.block.loop-single .hentry .archive-lists ul li .widget-post .meta-category a {
+	background: #1b93df;
+}
+
+.block.loop-single .hentry .archive-lists ul li .widget-post h4 a:hover {
+	color: #1B93DF;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Review System
+/*-----------------------------------------------------------------------------------*/
+
+#review-box ul li .review-criteria-bar {
+    background-color: #1b93df ! important;
+}
+
+#review-box .review-total-score .right {
+    background: #1b93df ! important;
+}
+
+.widget .review-badge {
+    background: #1b93df ! important;
+}

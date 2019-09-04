@@ -1,0 +1,203 @@
+@charset "utf-8";
+/* CSS Document */
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/screen.css" rel="stylesheet"  media="all" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="author" content="Cody Lindley - codylindley.com." />
+<meta name="ttw" content="b98vht0" />
+<meta name="description" content="Cody Lindley is a client-side/JavaScript developer (aka front-end engineer) and recovering Flash developer. He has an extensive background working professionally (11+ years) with HTML, CSS, JavaScript, Flash, and client-side performance techniques as it pertains to web development. If he is not wielding client-side code he is likely toying with interface/interaction design, PHP, MVC frameworks, iPhone development, jQuery, Dojo, or authoring material and speaking at various conferences. When not sitting in front of a computer, it's a sure bet he is hanging out with his wife &amp; kids in Meridian, Idaho, training for triathlons, skiing, mountain biking, road biking, alpine climbing, reading, watching movies, or debating the rational evidence for a Christian worldview." />
+<script type="text/javascript">
+// http://remysharp.com/2009/01/07/html5-enabling-script/
+(function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,canvas,datalist,details,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i])}})();
+</script>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<title>Cody Lindley | Front-end/Client-side/JavaScript Engineer | Boise,Idaho</title>
+</head>
+
+<body>
+
+<header><h1><a href="/"></a></h1>
+
+</header>
+
+<hr />
+
+<div id="content">
+
+<p class="introTxt">Cody Lindley is a front-end/JavaScript developer and recovering Flash developer. He has an extensive background working professionally (16+ years) with HTML, CSS, JavaScript, and client-side performance techniques as it pertains to web development. If he is not wielding client-side code he is likely toying with interface/interaction design or front-end application architecture. When not sitting in front of a computer, it's a sure bet he is hanging out with his wife &amp; three boys in Meridian, Idaho. In his spare time Cody is working towards being a <a href="http://www.str.org/blog/how-to-be-a-one-dollar-apologist-in-the-second-half-of-life#.VNmMr154ris" target="_blank">"One Dollar Apologist"</a> and enjoys defending the evidence for a <a href="http://www.str.org/articles/stand-to-reason-s-statement-of-faith#.Utf-m2RDsU0">classical Christian world-view</a> with reason and empathy.</p>
+
+<p class="introTxt">Currently he is working for <a href="http://www.telerik.com/">Telerik</a> as a Developer Advocate.</p>
+
+<div id="columnOne">
+
+<h2>Social Networks</h2>
+<menu id="sn">
+<li id="sn1"><a href="http://twitter.com/codylindley" class="toolTip" title="Twitter: codylindley" style="width:25px; background-position: 0 0;">Twitter</a></li>
+<li id="sn2"><a href="http://www.facebook.com/cody.lindley" class="toolTip" title="Facebook: http://www.facebook.com/cody.lindley" style="width:40px; background-position: -44px 0;">Facebook</a></li>
+<li id="sn3"><a href="http://www.linkedin.com/in/codylindley" class="toolTip" title="Linked In: http://www.linkedin.com/in/codylindley" style="width:40px; background-position: -103px 0;">Linked In</a></li>
+<li id="sn4"><a href="http://www.google.com/profiles/codylindley" class="toolTip" title="Google Profiles: http://www.google.com/profiles/codylindley" style="width:40px; background-position: -162px 0;">Google Profiles</a></li>
+<li id="sn5"><a href="http://github.com/codylindley" class="toolTip" title="GitHub: http://github.com/codylindley" style="width:43px; background-position: -221px 0;">Github</a></li>
+</menu>
+
+<div class="clearFloatNoHeight"></div>
+
+<h2>Contact</h2>
+<menu id="contact">
+<li id="contact1"><a href="#" rel="contact/codylindley#" title="Email" class="liame toolTip" style="width:43px; background-position: 0 0;">Email</a></li>
+<li  id="contact2"><a href="#" class="toolTip noLinkCursor" title="Cell: 208-859-1175" style="width:41px; background-position: -59px 0;">Cell Phone</a></li>
+<li  id="contact4"><a href="#" class="toolTip noLinkCursor" title="Home Address: 5650 N Tignes Ave, Meridian, Id 83646" style="width:37px; background-position: -172px 0;">Address</a></li>
+<li id="contact5"><a href="#" class="toolTip noLinkCursor" title="Skype: codylindley" style="width:40px; background-position: -225px 0;">Skype</a></li>
+</menu>
+
+<div class="clearFloatNoHeight"></div>
+
+</div>
+
+<div id="columnTwo">
+
+<!--
+<h2>jQuery Plugins/Snippets</h2>
+<a href="http://swip.codylindley.com" title="">swip.codylindley.com</a>
+-->
+
+<h2>Resume</h2>
+<a href="http://linkedin.com/in/codylindley" title="Resume" id="blog">linkedin</a>
+
+<h2>Portfolio</h2>
+<a href="http://codylindley.carbonmade.com/" title="Portfolio" id="portfolio">Cody Lindley Portfolio at carbonmade</a>
+
+</div>
+
+<div class="clearFloatNoHeight"></div>
+
+
+<h2>Books (Authored, Co-Authored, and Tech Edited)</h2>
+<menu id="books">
+<li id="book6"><a href="http://www.javascriptenlightenment.com/" title="JavaScript Enlightenment" style="width:83px; background-position: -500px 0;">JavaScript Enlightenment</a></li>
+<li id="book7"><a href="http://www.domenlightenment.com/" title="DOM Enlightenment" style="width:83px; background-position: -603px 0;">DOM Enlightenment</a></li>
+<li id="book1"><a href="http://jqueryenlightenment.com/" title="jQuery Enlightenment" style="width:83px; background-position: 0 0;">jQuery Enlightenment</a></li>
+<li id="book4"><a href="http://oreilly.com/catalog/9780596159788" title="jQuery Cookbook" style="width:77px; background-position: -307px 0;">jQuery Cookbook</a></li>
+<li id="book5"><a href="http://www.wiley.com/WileyCDA/WileyTitle/productCd-0470584459.html" title="" style="width:80px; background-position: -400px 0;">jQuery For Dummies</a></li>
+<li id="book2"><a href="http://www.apress.com/9781590598320" title="Textpattern Solutions:PHP-Based Content Management Made Easy" style="width:84px; background-position: -99px 0;">Textpattern Solutions:PHP-Based Content Management Made Easy</a></li>
+<li id="book3"><a href="http://www.apress.com/9781590592113" title="Byte-Size Flash MX: Adventures In Design Optimization" style="width:92px; background-position: -199px 0;">Byte-Size Flash MX: Adventures In Design Optimization</a></li>
+</menu>
+
+<div class="clearFloatNoHeight"></div>
+
+<h2>Interviews</h2>
+<ul class="articleList">
+   <li><a target="_blank" href="http://codylindley.com/interview/">Lost Interview</a></li>
+   <li><a target="_blank" href="https://www.youtube.com/watch?v=IkrhzcqilNE">jQuery Succinctly Interview with Cody Lindley</a></li>
+   <li><a target="_blank" href="http://programming.oreilly.com/2013/04/learning-paths-for-javascript-2.html">Learning Paths for JavaScript</a></li>
+</ul>
+
+<h2>Front-end Developer Jobs Board</h2>
+<ul class="articleList">
+   <li><a target="_blank" href="http://frontenddeveloperjob.com/">frontenddeveloperjob.com</a></li>
+</ul>
+
+<div class="clearFloatNoHeight"></div>
+
+<div class="clearFloatNoHeight"></div>
+
+<h2>Guides</h2>
+<ul class="articleList">
+   <li><a target="_blank" href="http://www.kendouimobileguide.com/">Kendo UI Mobile Guide</a></li>
+</ul>
+
+<div class="clearFloatNoHeight"></div>
+
+<h2>Articles</h2>
+<ul class="articleList">
+<li><a target="_blank" href="http://developer.telerik.com/featured/build-deploy-rich-ui-javascript-apps-fast/">Build &amp; Deploy Rich UI JavaScript Apps, FAST!</a></li>
+<li><a target="_blank" href="http://developer.telerik.com/featured/using-javascript-next-features-es3-enterprise-world/">Using JavaScript Next Features in an ES3 Enterprise World</a></li>
+  <li><a target="_blank" href="http://developer.telerik.com/featured/planning-front-end-javascript-application/">Planning A Front-end JavaScript Application</a></li>
+  <li><a target="_blank" href="http://developer.telerik.com/featured/mystical-magical-semver-ranges-used-npm-bower/">The Mystical &amp; Magical SemVer Ranges Used By npm &amp; Bower</a></li>
+  <li><a target="_blank" href="http://developer.telerik.com/featured/front-end-driven-applications-new-approach-applications/">Front-end Driven Applications Ã¢â‚¬â€œ A New Approach to Applications</a></li>
+  <li><a target="_blank" href="http://developer.telerik.com/featured/5-strategies-building-mobile-apps-telerik/">5 Strategies for Building Mobile Apps with Telerik</a></li>
+  <li><a target="_blank" href="http://developer.telerik.com/featured/case-kendo-ui/">The Case For Kendo UI</a></li>
+  <li><a target="_blank" href="http://developer.telerik.com/featured/12-extensions-apps-fill-gaps-devtools/">12 Extensions and Apps that Fill the Gaps in Chrome DevTools</a></li>
+   <li><a target="_blank" href="http://tech.pro/tutorial/1671/thinking-about-ecmascript-5-parts">Thinking About ECMAScript 5 Parts</a></li>
+   <li><a target="_blank" href="http://tech.pro/tutorial/1669/21-javascript-parts-i-struggle-to-remember-">21 JavaScript Parts I Struggle To Remember</a></li>
+	<li><a target="_blank" href="http://tech.pro/tutorial/1611/functional-javascript">Applicative Programming In JavaScript With lodash.js</a></li>
+   <li><a target="_blank" href="http://tech.pro/tutorial/1589/testable--tested-client-side-code">Testable &amp; Tested Client-side Code</a></li>
+   <li><a target="_blank" href="http://tech.pro/tutorial/1214/javascript-regular-expression-enlightenment">JavaScript Regular Expression Enlightenment</a></li>
+   <li><a target="_blank" href="http://tech.pro/tutorial/1190/package-managers-an-introductory-guide-for-the-uninitiated-front-end-developer">Package Managers: An Introductory Guide For The Uninitiated Front-End Developer</a></li>
+   <li><a target="_blank" href="http://tech.pro/tutorial/1367/part-1-backbonejs-deconstructed">Part 1: Backbone.js Deconstructed</a></li>
+   <li><a target="_blank" href="http://tech.pro/tutorial/1476/part-2-backbonejs-deconstructed">Part 2: Backbone.js Deconstructed</a></li>
+   <li><a target="_blank" href="http://tech.pro/tutorial/1428/abide-the-ui-widget-strategy">Abide The UI Widget Strategy</a></li>
+   <li><a target="_blank" href="http://net.tutsplus.com/tutorials/javascript-ajax/fully-understanding-the-this-keyword/">Fully Understanding the this Keyword</a></li>
+   <li><a target="_blank" href="http://msdn.microsoft.com/en-us/magazine/ff743754.aspx">Optimizations For Improving Page Load Times</a></li>
+   <li><a target="_blank" href="http://www.learningjquery.com/2008/12/peeling-away-the-jquery-wrapper">Peeling Away the jQuery Wrapper and Finding an Array</a></li>
+   <li><a target="_blank" href="http://www.codylindley.com/Tutorials/trigonometry/index.htm">Flash Trigonometry</a></li>
+</ul>
+
+<div class="clearFloatNoHeight"></div>
+
+<h2>Authored Tools, References, &amp; Code</h2>
+<ul class="articleList">
+
+<li><a target="_blank" href="http://jqueryuiwidgets.com/">jQuery Widget Toolkit Comparison</a></li>
+<li><a target="_blank" href="http://htmlelement.info/">htmlelement.info</a></li>   <li><a target="_blank" href="https://github.com/codylindley/frontend-tools">Landscaping With Frontend Development Tools</a></li>
+   <li><a target="_blank" href="http://codylindley.com/native.html">Native HTML Widgets/Forms</a></li>
+   <li><a target="_blank" href="http://www.webbrowsercompatibility.com/">webbrowsercompatibility.com</a> - Compatibility tables showing support for front-end technologies in web browsers</li>
+   <li><a target="_blank" href="http://codylindley.com/jqueryselectors/">jQuery Selectors</a></li>
+   <li><a target="_blank" href="http://codylindley.com/thickbox">Thickbox</a></li>
+</ul>
+
+<div class="clearFloatNoHeight"></div>
+
+<h2>Conference Talks</h2>
+<ul class="articleList">
+   <li>Planning A Front-end JS Application <a target="_blank" href="http://codylindley.com/spotlight-front-end/#7">slides</a> | <a target="_blank" href="https://www.youtube.com/watch?v=q4zEGkjTBFA">video</a></li>
+   <li>Front-end Driven Applications <a target="_blank" href="http://codylindley.com/web-unleashed/">slides</a></li>
+  <li>DOM it, forgive, forget, embrace <a target="_blank" href="http://confreaks.com/videos/2218-html5tx2013-dom-it-forgive-forget-embrace">video</a></li>
+</ul>
+
+</div>
+
+<div id="footer">&#169; 2013 Cody Lindley <a href="http://mediatemple.net/#a_aid=51fbf572af88c" title="Media Temple">Site Hosted By Media Temple</a> (<a href="http://mediatemple.net/#a_aid=51fbf572af88c">signup</a>, and they kick me some cash)
+
+<div style="float:right;width:140px;margin:-5px 58px 0 0;"><a href="https://twitter.com/codylindley" class="twitter-follow-button" data-show-count="false">Follow @codylindley</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
+
+</div>
+
+<div class="qtip qtip-stylename">
+   <div class="qtip-tip" rel="cornerValue"></div>
+   <div class="qtip-wrapper">
+      <div class="qtip-borderTop"></div>
+      <div class="qtip-contentWrapper">
+         <div class="qtip-title">
+            <div class="qtip-button"></div>
+         </div>
+         <div class="qtip-content"></div>
+      </div>
+      <div class="qtip-borderBottom"></div>
+   </div>
+</div>
+
+<div id="ad">
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=codylindley" id="_carbonads_js"></script>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="/js.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-162561-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
+

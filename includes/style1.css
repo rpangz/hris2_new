@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+.noPrint {
+    display: none;
+}
+.style1 {font-size: 12px; border-bottom:0px thin solid white;}
+.style2 {
+	font-size: 24px;
+	font-weight: bold;
+	border-bottom:0px thin solid black;
+}
+
+.style3 {
+	font-size: 18px;
+	font-weight: bold;
+	border-bottom:0px thin solid black;
+}
+.style4 {font-size: 10px; font-style: italic; }
+.style5 {font-size: 14px}
+
+.bigcell {
+    position: relative;
+    width: 100px;
+    height: 50px;
+    border: thin dotted gray;
+}
+
+td.thickBorder{ border-bottom: solid gray 1px;}
+td.thickBorderRight{ border-right: solid gray 1px;
+					border-bottom: solid gray 1px;}
+
+}
+.strikeout {
+	position: absolute;
+	height: 0px;
+	width: 179px;
+	background-color: black;
+	top: 146px;
+	visibility: inherit;
+	}
+.style7 {font-size: 12px; font-weight: bold; }
+.table1 { border:1px black solid; 
+			font-size: 12px;} /* or other border styles */
+table {font-size: 12px;}
+			
+.style11 {font-size: x-large}
+
+

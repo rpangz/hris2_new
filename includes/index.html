@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>vTicker news style</title>
+<style type="text/css" media="all">
+* {
+	padding:0px;
+	margin:0px;
+}
+.container {
+	margin:0 auto;
+	margin-top:150px;
+	width:950px;
+	background-color:#59ACFF;
+	box-shadow:0px 0px 20px #999;
+}
+.news-head {
+	font-size:26px;
+	font-family:Tahoma, Geneva, sans-serif;
+	height:35px;
+	padding:10px;
+}
+.news-head > a {
+	color:#fff;
+	text-decoration:none;
+	text-transform:uppercase;
+	}
+</style>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.vticker-min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#news').vTicker({ 
+		speed: 500,
+		pause: 3000,
+		animation: 'fade', 
+		mousePause: false,
+		showItems: 1
+	});
+});
+</script>
+</head>
+
+<body>
+<h2 align="center"> Main Tutorial <a href=""> vTicker news style </a> &nbsp; / &nbsp; More Toturial <a href="http://www.2my4edge.com"> www.2my4edge.com </a> </h2>  
+<div class="container" id="news">
+  <ul>
+    <li class="news-head">
+      <a href="http://www.2my4edge.com/2013/12/add-sum-table-row-values-in-database.html" >SUM the table row values in database using PHP</a>
+    </li>
+    <li class="news-head">
+      <a href="http://www.2my4edge.com/2013/11/dynamic-data-table-using-datatable.html" >Dynamic Data Table using DataTable Jquery</a>
+    </li>
+    <li class="news-head">
+      <a href="http://www.2my4edge.com/2013/10/drag-and-drop-concept-using-jquery.html" >Drag and Drop Concept using Jquery</a>
+    </li>
+    <li class="news-head">
+      <a href="http://www.2my4edge.com/2013/10/image-zoom-on-hover-using-css3.html" >Image zoom on hover using css3</a>
+    </li>
+    <li class="news-head">
+      <a href="http://www.2my4edge.com/2013/08/how-to-view-more-web-pages-in-single.html" >How to view more web pages in one web page</a>
+    </li>
+    <li class="news-head">
+      <a href="http://www.2my4edge.com/2013/06/browser-full-screen-api-using-query.html" >Full screen API using JQuery</a>
+    </li>
+    
+  </ul>
+</div>
+</body>
+</html>
