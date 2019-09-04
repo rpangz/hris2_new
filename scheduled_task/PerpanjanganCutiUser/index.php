@@ -279,4 +279,7 @@ while ($rows = mysql_fetch_array($query1)){
 }
 
 
-//echo"<script type='text/javascript'>alert('Email Berhasil Dikirim. Click OK to close
+//echo"<script type='text/javascript'>alert('Email Berhasil Dikirim. Click OK to close window');window.open('', '_self', '');window.close();</script>";
+
+
+?>

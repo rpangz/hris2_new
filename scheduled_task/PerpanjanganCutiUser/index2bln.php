@@ -63,7 +63,7 @@ Periode2 ='$today' AND PeriodeExt IS NULL
 GROUP BY tbl_hakcuti.NIK 
 Having Sisa > 0";
 
-echo $sql;				
+			
 $query 		= mysql_query($sql);
 $total 	    = mysql_num_rows($query);
 
@@ -180,7 +180,7 @@ if ($total > 0){
 while ($rows = mysql_fetch_array($query1)){	
 	
 	$datacompany = $rows[CompanyId];
-	
+
 	$cm	    = mysql_fetch_array(mysql_query("SELECT * FROM tbl_company WHERE iCompanyId = $rows[CompanyId]"));	
 	$NIK	= $rows['NIK'];
 
@@ -239,4 +239,35 @@ while ($rows = mysql_fetch_array($query1)){
     $mysqlcommcekhrd = "SELECT * FROM tbl_apv_hrd WHERE hrd_modules = 'form_cuti' 
                         AND hrd_status = 1 AND hrd_company = ".$datacompany." AND hrd_nik NOT IN (5144,3967)" ;
     $sqlcekhrd = mysql_query($mysqlcommcekhrd);
-    while ($datacekhrd = mysql_fe
+    while ($datacekhrd = mysql_fetch_array($sqlcekhrd)){   
+        $mailhrd = $datacekhrd['hrd_email'];
+        $mail->AddCC($mailhrd);                 
+    }
+    $mail->AddBCC("ronaldo.pangasian@unias.com");                 
+    //========================================================================================================================
+
+
+	$mail->Subject    = "Perpanjangan Sisa Cuti";
+	$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; 	
+	$mail->WordWrap   = 80;	
+	$mail->IsHTML(true);	
+	$mail->Send();	
+	//echo $mail->Body;
+	
+	
+		}
+		catch (phpmailerException $e)
+		{
+		echo $e->errorMessage();
+		}
+			
+}
+
+
+}
+
+
+//echo"<script type='text/javascript'>alert('Email Berhasil Dikirim. Click OK to close window');window.open('', '_self', '');window.close();</script>";
+
+
+?>
