@@ -213,17 +213,18 @@ if (!file_exists($database_path)) {
 
 
 //Pengecekan Dept
-$mysqlcomm = "SELECT nik,nama,deptid FROM tbl_profile WHERE deptid = ".$department." AND bstatus = 1 ".$connscript." LIMIT 1000";
+$mysqlcomm = "SELECT nik,nama,deptid,nik_absensi FROM tbl_profile WHERE deptid = ".$department." AND bstatus = 1 ".$connscript." LIMIT 1000";
 $query  = mysql_query($mysqlcomm);
 $total  = mysql_num_rows($query);
 
+$norekap = 0;
 while ($data = mysql_fetch_array($query)){ //awal load karyawan
             $norekap = $norekap + 1;
-            $session_nik = $data['nik'];
+            $session_nik = $data['nik_absensi'];
             $namakary = $data['nama'];
 
      
-$norekap = 0;
+
 $total_sakit_tanpa_surat_dokter = 0;
 $total_sakit_dengan_surat_dokter = 0;
 $total_cuti = 0;
@@ -387,7 +388,8 @@ else{
         && (
             check_array_cuti($date,$datacuti) &&
             check_array_ijin($date,$dataijindata) &&
-            check_array_libur($date,$dataliburdata) 
+            check_array_libur($date,$dataliburdata) &&
+            check_sakit_tanpa_surat($date,$dataijindata)
             ) 
         && ($N<>"6" && $N<>"7") ) {
         $total_alpa = $total_alpa + 1;
@@ -869,7 +871,7 @@ function check_ijin_record($periode1,$periode2,$session_nik){
   $tgl    = date('Y-m-d', strtotime($date));
   $mysqlcomm = "SELECT SUM(sakittanpasurat) sakittanpasurat,SUM(sakitdengansurat) sakitdengansurat,SUM(lain) lain FROM (
                 SELECT
-                CASE WHEN jenisijin = 3 AND DATEDIFF(tglactive2,tglactive1) IS NOT NULL THEN DATEDIFF(tglactive2,tglactive1) ELSE 0 END sakittanpasurat,
+                CASE WHEN jenisijin = 3 AND tglactive1>='".$periode1."' AND tglactive1<='".$periode2."' THEN 1 ELSE 0 END sakittanpasurat,
                 CASE WHEN jenisijin = 10 AND DATEDIFF(tglactive2,tglactive1) IS NOT NULL THEN DATEDIFF(tglactive2,tglactive1) ELSE 0 END sakitdengansurat,
                 CASE WHEN jenisijin = 9 AND DATEDIFF(tglactive2,tglactive1) IS NOT NULL THEN DATEDIFF(tglactive2,tglactive1) ELSE 0 END lain
                 FROM (
@@ -904,7 +906,7 @@ function check_ijin_record($periode1,$periode2,$session_nik){
 function check_ijin_data($periode1,$periode2,$session_nik){
 
   $tgl    = date('Y-m-d', strtotime($date));
-  $mysqlcomm = "SELECT tglactive1,tglactive2 FROM tbl_formijin WHERE (tglactive1>='".$periode1."' OR tglactive2<='".$periode2."') 
+  $mysqlcomm = "SELECT DATE(tglactive1) tglactive1,DATE(tglactive2) tglactive2 FROM tbl_formijin WHERE (tglactive1>='".$periode1."' OR tglactive2<='".$periode2."') 
                 AND nik = ".$session_nik." AND statusform = 'A' ";
 
                      
@@ -985,6 +987,30 @@ function check_array_ijin($date,$dataijindata){
           $hitung = $hitung + 1;
       } 
   } 
+
+
+  if($hitung>0) {
+    return false;
+  } else {
+    return true;
+  }
+
+/*
+  return true;
+*/
+}
+
+function check_sakit_tanpa_surat($date,$dataijindata){
+
+
+  $hitung = 0;  
+  $countarraydataijindata = sizeof($dataijindata); //untuk mengecek data di dalam array  
+  for($i=0;$i<=$countarraydataijindata-1;$i++){ 
+      if ($date==$dataijindata[$i][tglactive1]) {        
+          $hitung = $hitung + 1;
+      } 
+  } 
+
 
 
   if($hitung>0) {

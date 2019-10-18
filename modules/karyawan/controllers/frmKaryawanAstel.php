@@ -110,16 +110,18 @@ class frmKaryawanAstel extends CMS_Priv_Strict_Controller {
         // set subject
         $crud->set_subject('Karyawan');
 
-        $crud->columns('Photos','NIK','Nama','NoKK','NoKTP','TglKTP','Sex','Agama','TglLahir','TptLahir','AlamatKTP','AlamatDomisili','Kodepos','Telp','Hp','BloodType','StatusDiri','NamaIbuKandung','NoNPWP','NoKPJ','NoBPJSKes','EmailPribadi','CompanyId','DivisiID','DeptID','UnitID','SeksiID','JabatanID','BandSkrg','Grade','Email','member','bStatus','TermsAndConditions','UpdatedTime');
+        $crud->columns('Photos','NIK','Nama','NoKK','NoKTP','TglKTP','Sex','Agama','TglLahir','TptLahir','AlamatKTP','AlamatDomisili','Kodepos','Telp','Hp','BloodType','StatusDiri','NamaIbuKandung','NoNPWP','NoKPJ','NoBPJSKes','EmailPribadi','CompanyId','DivisiID','DeptID','UnitID','SeksiID','JabatanID','BandSkrg','Grade','Email','member','bStatus','TermsAndConditions','UpdatedTime','UpdatedBy');
 
-        $crud->add_fields('Photos','NIK','NoKK','NoKTP','TglKTP','Nama','Sex','Agama','TglLahir','TptLahir','AlamatKTP','CityKTP','KodeposKTP','AlamatDomisili','CityDomisili','Kodepos','Telp','Hp','BloodType','StatusDiri','NamaIbuKandung','NoNPWP','NoKPJ','NoBPJSKes','EmailPribadi','CompanyId','DivisiID','DeptID','UnitID','SeksiID','Email','JabatanID','JobId','BandSkrg','Grade','TglMasuk','TglKeluar','Status','bStatus','member','workexp','Education','training','technical','certification','project','Files','attachment','CreatedBy','CreatedTime','UpdatedBy','UpdatedTime');
+        $crud->add_fields('Photos','NIK','NIK_Absensi','NoKK','NoKTP','TglKTP','Nama','Sex','Agama','TglLahir','TptLahir','AlamatKTP',
+            'KDPROP','KDDATI2','KDKEC','KDDESA',
+            'CityKTP','KodeposKTP','AlamatDomisili','CityDomisili','Kodepos','Telp','Hp','BloodType','StatusDiri','NamaIbuKandung','NoNPWP','NoKPJ','NoBPJSKes','norek','namarek','bankrek','cabangrek','EmailPribadi','CompanyId','DivisiID','DeptID','UnitID','SeksiID','Email','JabatanID','JobId','BandSkrg','Grade','TglMasuk','TglKeluar','Status','lamakontrak','startkontrak','endkontrak','bStatus','member','workexp','Education','training','technical','certification','project','Files','attachment','CreatedBy','CreatedTime','UpdatedBy','UpdatedTime');
 
-        $crud->edit_fields('Photos','NIK','NoKK','NoKTP','TglKTP','Nama','Sex','Agama','TglLahir','TptLahir','AlamatKTP','CityKTP','KodeposKTP','AlamatDomisili','CityDomisili','Kodepos','Telp','Hp','BloodType','StatusDiri','NamaIbuKandung','NoNPWP','NoKPJ','NoBPJSKes','EmailPribadi','CompanyId','DivisiID','DeptID','UnitID','SeksiID','Email','JabatanID','JobId','BandSkrg','Grade','TglMasuk','TglKeluar','Status','bStatus','member','workexp','Education','training','technical','certification','project','Files','attachment','UpdatedBy','UpdatedTime');        
+        $crud->edit_fields('Photos','NIK','NIK_Absensi','NoKK','NoKTP','TglKTP','Nama','Sex','Agama','TglLahir','TptLahir','AlamatKTP',
+            'KDPROP','KDDATI2','KDKEC','KDDESA',
+            'CityKTP','KodeposKTP','AlamatDomisili','CityDomisili','Kodepos','Telp','Hp','BloodType','StatusDiri','NamaIbuKandung','NoNPWP','NoKPJ','NoBPJSKes','norek','namarek','bankrek','cabangrek','EmailPribadi','CompanyId','DivisiID','DeptID','UnitID','SeksiID','Email','JabatanID','JobId','BandSkrg','Grade','TglMasuk','TglKeluar','Status','lamakontrak','startkontrak','endkontrak','bStatus','member','workexp','Education','training','technical','certification','project','Files','attachment','UpdatedBy','UpdatedTime');        
 
-        //$crud->required_fields('NIK','Nama','NoKK','NoKTP','TglKTP','Sex','TglLahir','TptLahir','Agama','Status','AlamatKTP','CityKTP','KodeposKTP','AlamatDomisili','CityDomisili','Kodepos','Hp','BloodType','StatusDiri','NamaIbuKandung','NoNPWP','NoKPJ','EmailPribadi','CompanyId','DivisiID','DeptID','UnitID','Email','JabatanID','JobId','TglMasuk','bStatus');
-        $crud->required_fields('NIK','Nama','Sex','Agama','TglLahir','TglMasuk','Email','CompanyId','DivisiID','DeptID','UnitID','Status','bStatus');
+        $crud->required_fields('NIK','NIK_absensi','Nama','Sex','Agama','TglLahir','TglMasuk','Email','CompanyId','DivisiID','DeptID','UnitID','Status','bStatus');
        
-
         $crud->unset_add_fields('CreatedBy','CreatedTime','UpdatedBy','UpdatedTime');
         $crud->field_type('CreatedBy', 'hidden', $session_nik);
         $crud->field_type('CreatedTime', 'hidden', $today);        
@@ -131,8 +133,9 @@ class frmKaryawanAstel extends CMS_Priv_Strict_Controller {
          
         $crud->set_field_upload('Photos','assets/uploads/files');
         // caption of each columns      
-                
+
         $crud->display_as('NIK','NIK');
+        $crud->display_as('NIK_absensi','Nik Absensi');
         $crud->display_as('Sex','Sex');
         $crud->display_as('NoKK','No Kartu Keluarga');        
         $crud->display_as('BandSkrg','Band');
@@ -173,6 +176,17 @@ class frmKaryawanAstel extends CMS_Priv_Strict_Controller {
         $crud->display_as('Agama','Relegion');
         $crud->display_as('bStatus','Join Status');
         $crud->display_as('TermsAndConditions','Updated');
+
+        /*Penambahan Baru=================================*/    
+        $crud->display_as('lamakontrak','Lama Kontrak');
+        $crud->display_as('norek','No Rekening');
+        $crud->display_as('namakre','Nama Rekening');
+        $crud->display_as('cabangrek','Cabang Rekening');
+        $crud->display_as('bankrek','Bank Rekening');
+        $crud->display_as('startkontrak','Start Kontrak');
+        $crud->display_as('endkontrak','End Kontrak');
+
+        
         
         
         $crud->unique_fields('NIK');
@@ -215,6 +229,7 @@ class frmKaryawanAstel extends CMS_Priv_Strict_Controller {
         $crud->callback_add_field('SeksiID', array($this, 'empty_seksi_dropdown_select'));
         $crud->callback_edit_field('SeksiID', array($this, 'empty_seksi_dropdown_select'));
         $crud->callback_edit_field('TermsAndConditions', array($this, '_callback_column_TermsAndConditions'));
+
         $crud->callback_column('NoKPJ',array($this,'_callback_column_NoKPJ'));
         $crud->callback_column('NoNPWP',array($this,'_callback_column_NoNPWP'));
         $crud->callback_column('NoKTP',array($this,'_callback_column_NoKTP'));
@@ -240,6 +255,7 @@ class frmKaryawanAstel extends CMS_Priv_Strict_Controller {
         $crud->callback_column('Photos',array($this,'_callback_column_Photos'));
         $crud->callback_column('StatusDiri',array($this,'_callback_column_StatusDiri'));
         $crud->callback_column('TermsAndConditions', array($this, '_callback_column_TermsAndConditions2'));
+        $crud->callback_column('UpdatedBy', array($this, '_callback_update_name'));
 
 
         $crud->callback_field('NoBPJSKes',array($this,'_callback_field_NoBPJSKes'));
@@ -254,8 +270,24 @@ class frmKaryawanAstel extends CMS_Priv_Strict_Controller {
         $crud->callback_field('NIK',array($this,'_callback_field_NIK'));
         $crud->callback_field('NoKK',array($this,'_callback_field_NoKK'));
         $crud->callback_field('NoKPJ',array($this,'_callback_field_NoKPJ'));
+        $crud->callback_field('lamakontrak',array($this,'_callback_lama_kontrak'));
+        $crud->callback_field('bankrek',array($this,'_callback_bankrek'));
 
+ 
         $crud->add_action('FormCV', 'http://'.$_SERVER['SERVER_NAME'].'/hris2/includes/images/cv4.png', ' ',' http://'.$_SERVER['SERVER_NAME'].'/hris2/includes/images/cv4.png',array($this,'_callback_column_FormCV'));
+
+
+        $crud->set_relation('KDPROP', $this->cms_complete_table_name('propinsi'), 'NMPROP',array('KDNEGARA' => 'IDN'));
+        $crud->set_relation('KDDATI2', $this->cms_complete_table_name('dati2'), '{KDDATI2} - {NMDATI2}');
+        $crud->set_relation('KDKEC', $this->cms_complete_table_name('kec'), '{KDKEC} - {NMKEC}');
+        $crud->set_relation('KDDESA', $this->cms_complete_table_name('desa'), '{KDDESA} - {NMDESA}');        
+
+        $crud->callback_add_field('KDDATI2', array($this, 'empty_dati2_dropdown_select'));
+        $crud->callback_edit_field('KDDATI2', array($this, 'empty_dati2_dropdown_select'));
+        $crud->callback_add_field('KDKEC', array($this, 'empty_kec_dropdown_select'));
+        $crud->callback_edit_field('KDKEC', array($this, 'empty_kec_dropdown_select'));
+        $crud->callback_add_field('KDDESA', array($this, 'empty_desa_dropdown_select'));
+        $crud->callback_edit_field('KDDESA', array($this, 'empty_desa_dropdown_select'));
 
         $this->crud = $crud;
         return $crud;
@@ -285,9 +317,23 @@ class frmKaryawanAstel extends CMS_Priv_Strict_Controller {
                 'dd_ajax_loader' => base_url().'ajax-loader.gif'
             );       
 
+        $dd_data2 = array(
+                //GET THE STATE OF THE CURRENT PAGE - E.G LIST | ADD
+                'dd_state2' =>  $crud->getState(),
+                //SETUP YOUR DROPDOWNS
+                //Parent field item always listed first in array, in this case countryID
+                //Child field items need to follow in order, e.g stateID then cityID
+                'dd_dropdowns2' => array('KDPROP','KDDATI2','KDKEC','KDDESA'),
+                //SETUP URL POST FOR EACH CHILD
+                //List in order as per above
+                'dd_url2' => array('', site_url().'/bpjs/frmRegistration/get_dati2/', site_url().'/bpjs/frmRegistration/get_kec/', site_url().'/bpjs/frmRegistration/get_desa/'),
+                //LOADER THAT GETS DISPLAYED NEXT TO THE PARENT DROPDOWN WHILE THE CHILD LOADS
+                'dd_ajax_loader2' => base_url().'ajax-loader.gif'
+            );
 
         $output = $crud->render();
-        $output->dropdown_setup = $dd_data;            
+        $output->dropdown_setup = $dd_data;      
+        $output->dropdown_setup2 = $dd_data2;            
         $this->_example_output($output);
 
     }
@@ -3443,9 +3489,287 @@ class frmKaryawanAstel extends CMS_Priv_Strict_Controller {
     }
 
 
+    public function _callback_lama_kontrak($value, $primary_key){
+
+        //CREATE THE EMPTY SELECT STRING
+        $empty_select = '<select data-live-search="true" class="chosen-select" data-show-subtext="true" data-container="body" data-width="100%" name="lamakontrak" id="lamakontrak" style="width:100%">';
+        //$empty_select = '<select name="DestinationID" id="DestinationID" class="chzn-select form-control" data-placeholder="Select Project ID" style="width: 100% !important;" disabled>';
+
+        //$empty_select .= '<option value="0" selected="selected" disabled>'.$this->cms_lang('Select').' '.$this->cms_lang('Status Form').'</option>';
+        $empty_select_closed = '</select>';
+
+        $listingID = $this->uri->segment(5);       
+              
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+
+       
+        if(isset($listingID) && $state == "edit"){
+
+            $this->db->select('*')
+                     ->from('tbl_profile')
+                     ->where('nik', $primary_key);
+            $db = $this->db->get();
+            $data = $db->row(0);
+            $Lama_Kontrak = $data->Lama_Kontrak;                           
+                
+                $this->db->select('*')
+                         ->from('tbl_list_kontrak')
+                         ->where('kontrak_status','1')
+                         ->order_by('kontrak_ordinal','ASC');
+
+                $db2 = $this->db->get();                            
+                foreach($db2->result() as $row):
+                    if($row->kontrak_id == $ticket_status) {
+                        $empty_select .= '<option value="'.$row->kontrak_id.'" data-subtext="" selected="selected">'.$row->kontrak_desc.'</option>';
+                    } else {
+                        $empty_select .= '<option value="'.$row->kontrak_id.'" data-subtext="">'.$row->kontrak_desc.'</option>';
+                    }
+                endforeach;    
+               
+                                                  
+            
+            return $empty_select.$empty_select_closed;
+
+        } else {
+
+
+                    $this->db->select('*')
+                         ->from('tbl_list_kontrak')
+                         ->where('kontrak_status','1')
+                         ->order_by('kontrak_ordinal','ASC');
+
+                        
+                $db2 = $this->db->get();            
+
+                foreach($db2->result() as $row):
+                   
+                    $empty_select .= '<option value="'.$row->kontrak_id.'" data-subtext="">'.$row->kontrak_desc.'</option>';
+                    
+                endforeach;
+
+            return $empty_select.$empty_select_closed;  
+        }
+    }
+
+    public function _callback_bankrek($value, $primary_key){
+
+        //CREATE THE EMPTY SELECT STRING
+        $empty_select = '<select data-live-search="true" class="chosen-select" data-show-subtext="true" data-container="body" data-width="100%" name="bankrek" id="bankrek" style="width:100%">';
+        //$empty_select = '<select name="DestinationID" id="DestinationID" class="chzn-select form-control" data-placeholder="Select Project ID" style="width: 100% !important;" disabled>';
+
+        //$empty_select .= '<option value="0" selected="selected" disabled>'.$this->cms_lang('Select').' '.$this->cms_lang('Status Form').'</option>';
+        $empty_select_closed = '</select>';
+
+        $listingID = $this->uri->segment(5);       
+              
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+
+       
+        if(isset($listingID) && $state == "edit"){
+
+            $this->db->select('*')
+                     ->from('tbl_profile')
+                     ->where('nik', $primary_key);
+            $db = $this->db->get();
+            $data = $db->row(0);
+            $bankrek = $data->namabankrek;                           
+                
+                $this->db->select('*')
+                         ->from('tbl_list_bankrek')
+                         ->where('statusbankrek','1')
+                         ->order_by('kodebankrek','ASC');
+
+                $db2 = $this->db->get();                            
+                foreach($db2->result() as $row):
+                    if($row->namabankrek == $bankrek) {
+                        $empty_select .= '<option value="'.$row->namabankrek.'" data-subtext="" selected="selected">'.$row->namabankrek.'</option>';
+                    } else {
+                        $empty_select .= '<option value="'.$row->namabankrek.'" data-subtext="">'.$row->namabankrek.'</option>';
+                    }
+                endforeach;    
+               
+                                                  
+            
+            return $empty_select.$empty_select_closed;
+
+        } else {
+
+
+                    $this->db->select('*')
+                         ->from('tbl_list_bankrek')
+                         ->where('statusbankrek','1')
+                         ->order_by('kodebankrek','ASC');
+
+                        
+                $db2 = $this->db->get();            
+
+                foreach($db2->result() as $row):
+                   
+                    $empty_select .= '<option value="'.$row->namabankrek.'" data-subtext="">'.$row->namabankrek.'</option>';
+                    
+                endforeach;
+
+            return $empty_select.$empty_select_closed;  
+        }
+    }
     
+    //CALLBACK FUNCTIONS
+    public function empty_dati2_dropdown_select()
+    {
+        //CREATE THE EMPTY SELECT STRING
+        $empty_select = '<select name="KDDATI2" class="chosen-select" data-placeholder="Select Kab/Kota" style="width: 300px; display: none;">';
+        $empty_select_closed = '</select>';
+        //GET THE ID OF THE LISTING USING URI
+        $listingID = $this->uri->segment(5);
+        
+        //LOAD GCRUD AND GET THE STATE
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+        
+        //CHECK FOR A URI VALUE AND MAKE SURE ITS ON THE EDIT STATE
+        if(isset($listingID) && $state == "edit") {
+            //GET THE STORED STATE ID
+            $this->db->select('KDPROP, KDDATI2, KDKEC, KDDESA')
+                     ->from('tbl_bpjs')
+                     ->where('bpjs_Id', $listingID);
+            $db = $this->db->get();
+            $row = $db->row(0);
+            $KDPROP = $row->KDPROP;
+            $KDDATI2 = $row->KDDATI2;
+            
+            //GET THE STATES PER COUNTRY ID
+            $this->db->select('*')
+                     ->from('tbl_dati2')
+                     ->where('KDPROP', $KDPROP);
+            $db = $this->db->get();
+            
+            //APPEND THE OPTION FIELDS WITH VALUES FROM THE STATES PER THE COUNTRY ID
+            foreach($db->result() as $row):
+                if($row->KDDATI2 == $KDDATI2) {
+                    $empty_select .= '<option value="'.$row->KDDATI2.'" selected="selected">'.$row->KDDATI2.' - '.$row->NMDATI2.'</option>';
+                } else {
+                    $empty_select .= '<option value="'.$row->KDDATI2.'">'.$row->KDDATI2.' - '.$row->NMDATI2.'</option>';
+                }
+            endforeach;
+            
+            //RETURN SELECTION COMBO
+            return $empty_select.$empty_select_closed;
+        } else {
+            //RETURN SELECTION COMBO
+            return $empty_select.$empty_select_closed;  
+        }
+    }
 
+    public function empty_kec_dropdown_select()
+    {
+        //CREATE THE EMPTY SELECT STRING
+        $empty_select = '<select name="KDKEC" class="chosen-select" data-placeholder="Select Kecamatan" style="width: 300px; display: none;">';
+        $empty_select_closed = '</select>';
+        //GET THE ID OF THE LISTING USING URI
+        $listingID = $this->uri->segment(5);
+        
+        //LOAD GCRUD AND GET THE STATE
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+        
+        //CHECK FOR A URI VALUE AND MAKE SURE ITS ON THE EDIT STATE
+        if(isset($listingID) && $state == "edit") {
+            //GET THE STORED STATE ID
+            $this->db->select('KDPROP, KDDATI2, KDKEC, KDDESA')
+                     ->from('tbl_bpjs')
+                     ->where('bpjs_Id', $listingID);
+            $db = $this->db->get();
+            $row = $db->row(0);
+            $KDDATI2 = $row->KDDATI2;
+            $KDKEC = $row->KDKEC;
+            
+            //GET THE CITIES PER STATE ID
+            $this->db->select('*')
+                     ->from('tbl_kec')
+                     ->where('KDDATI2', $KDDATI2);
+            $db = $this->db->get();
+            
+            //APPEND THE OPTION FIELDS WITH VALUES FROM THE STATES PER THE COUNTRY ID
+            foreach($db->result() as $row):
+                if($row->KDKEC == $KDKEC) {
+                    $empty_select .= '<option value="'.$row->KDKEC.'" selected="selected">'.$row->KDKEC.' - '.$row->NMKEC.'</option>';
+                } else {
+                    $empty_select .= '<option value="'.$row->KDKEC.'">'.$row->KDKEC.' - '.$row->NMKEC.'</option>';
+                }
+            endforeach;
+            
+            //RETURN SELECTION COMBO
+            return $empty_select.$empty_select_closed;
+        } else {
+            //RETURN SELECTION COMBO
+            return $empty_select.$empty_select_closed;  
+        }
+    }
+     
+    public function empty_desa_dropdown_select()
+    {
+        //CREATE THE EMPTY SELECT STRING
+        $empty_select = '<select name="KDDESA" class="chosen-select" data-placeholder="Select Desa" style="width: 300px; display: none;">';
+        $empty_select_closed = '</select>';
+        //GET THE ID OF THE LISTING USING URI
+        $listingID = $this->uri->segment(5);
+        
+        //LOAD GCRUD AND GET THE STATE
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+        
+        //CHECK FOR A URI VALUE AND MAKE SURE ITS ON THE EDIT STATE
+        if(isset($listingID) && $state == "edit") {
+            //GET THE STORED STATE ID
+            $this->db->select('KDPROP, KDDATI2, KDKEC, KDDESA')
+                     ->from('tbl_bpjs')
+                     ->where('bpjs_Id', $listingID);
+            $db = $this->db->get();
+            $row = $db->row(0);
+            $KDDESA = $row->KDDESA;
+            $KDKEC = $row->KDKEC;
+            
+            //GET THE CITIES PER STATE ID
+            $this->db->select('*')
+                     ->from('tbl_desa')
+                     ->where('KDDESA', $KDDESA);
+            $db = $this->db->get();
+            
+            //APPEND THE OPTION FIELDS WITH VALUES FROM THE STATES PER THE COUNTRY ID
+            foreach($db->result() as $row):
+                if($row->KDDESA == $KDDESA) {
+                    $empty_select .= '<option value="'.$row->KDDESA.'" selected="selected">'.$row->KDDESA.' - '.$row->NMDESA.'</option>';
+                } else {
+                    $empty_select .= '<option value="'.$row->KDDESA.'">'.$row->KDDESA.' - '.$row->NMDESA.'</option>';
+                }
+            endforeach;
+            
+            //RETURN SELECTION COMBO
+            return $empty_select.$empty_select_closed;
+        } else {
+            //RETURN SELECTION COMBO
+            return $empty_select.$empty_select_closed;  
+        }
+    }      
 
+    public function _callback_update_name($value){
+        if (!empty($value)){
+
+            $this->db->select('*')
+                 ->from('tbl_profile')
+                 ->where('NIK', $value);
+            $db = $this->db->get();
+            $data = $db->row(0);
+            $num_row = $db->num_rows();
+
+            return $data->Nama;
+        }else{
+            return '';
+        }     
+    
+    }
 
 
 

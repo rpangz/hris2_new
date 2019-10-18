@@ -7,6 +7,9 @@
 
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+$performance_management=1;
+
+
 $asset = new CMS_Asset();
 foreach($css_files as $file){
     $asset->add_css($file);
@@ -185,9 +188,9 @@ table td{
     <td width="20%"><?php echo $result['EmployeeID'].'/'.$crud->cms_table_data($table_name='tbl_profile', $where_column='NIK', $result_column='Nama', $result['EmployeeID']);?></td>
 
     <?php if ($key_type == 1){ ?>
-    <td colspan="15" rowspan="3" bgcolor="#CCCCCC"><div align="center"><strong>PERFORMANCE MANAGEMENT FORM<br /> TANPA BAWAHAN (ANALYST/OFFICER)</strong></div></td>
+    <td colspan="15" rowspan="3" bgcolor="#CCCCCC"><div align="center"><strong>PERFORMANCE APPRAISAL FORM<br /> TANPA BAWAHAN (ANALYST/OFFICER)</strong></div></td>
     <?php } else { ?>
-    <td colspan="15" rowspan="3" bgcolor="#CCCCCC"><div align="center"><strong>PERFORMANCE MANAGEMENT FORM<br /> ADA BAWAHAN (MANAJERIAL)</strong></div></td>
+    <td colspan="15" rowspan="3" bgcolor="#CCCCCC"><div align="center"><strong>PERFORMANCE APPRAISAL FORM<br /> ADA BAWAHAN (MANAJERIAL)</strong></div></td>
     <?php } ?>
 
   </tr>
@@ -220,40 +223,40 @@ table td{
   </tr>
 
   <tr>
-    <td width="28" rowspan="3" width="5%"><div align="center"><strong>NO</strong></div></td>
-    <td colspan="2" rowspan="3"><div align="center"><strong>ACTIVITY PLAN</strong></div></td>
-    <td width="3%" rowspan="3"><div align="center"><strong>UoM</strong></div></td>
-    <td width="5%" rowspan="3"><div align="center"><strong>DD</strong></div></td>
-    <td width="3%" rowspan="2"><div align="center"><strong>Bobot (%)</strong></div></td>
-    <td width="8%" rowspan="2"><div align="center"><strong>PLAN</strong></div></td>
+    <td width="28" rowspan="4" width="5%"><div align="center"><strong>NO</strong></div></td>
+    <td colspan="2" rowspan="4"><div align="center"><strong>ACTIVITY PLAN</strong></div></td>
+    <td width="3%" rowspan="4"><div align="center"><strong>UoM</strong></div></td>
+    <td width="5%" rowspan="4"><div align="center"><strong>DD</strong></div></td>
+    <td width="3%" rowspan="4"><div align="center"><strong>Bobot (%)</strong></div></td>
+    <td width="8%" rowspan="4"><div align="center"><strong>PLAN</strong></div></td>
     <td colspan="2" rowspan="2"><div align="center"><strong>ACTUAL</strong></div></td>
     <td width="3%" colspan="3" rowspan="2"><div align="center"><strong>% Achieve<br />ment </strong></div></td>
-    <td rowspan="3" width="15%"><div align="center"><strong>Catatan Karyawan</strong></div></td>
-    <td width="3%"><div align="center"><strong>Penilaian <br />Karyawan</strong></div></td>
-    <td width="3%"><div align="center"><strong>Penilaian Atasan</strong></div></td>
-    <td width="3%"><div align="center"><strong>NILAI AKHIR</strong></div></td>
-    <td width="3%" rowspan="2" class="text-center"><strong>SCORE AKHIR<br />
-    (Nilai X Bobot)</strong></td>
-    <td rowspan="3" width="15%"><div align="center"><strong>Catatan Atasan</strong></div></td>
+    <td rowspan="4" width="15%"><div align="center"><strong>Catatan Karyawan</strong></div></td>
+    <td style="width: 20%;" colspan="4"><div align="center"><strong>Penilaian</strong></div></td>    
+    <td rowspan="4" width="15%"><div align="center"><strong>Catatan Atasan</strong></div></td>
   </tr>
   <tr>
-    <td><div align="center"><strong>Nilai Skala (1-5)</strong></div></td>
-    <td><div align="center"><strong>Nilai Skala (1-5)</strong></div></td>
-    <td><div align="center"><strong>Nilai Skala (1-5)</strong></div></td>
+    <td style="width: 5%;" rowspan="3"><div align="center"><strong>Atasan <br> Skala (1-5)</strong></div></td>
+    <td style="width: 5%;" rowspan="3"><div align="center"><strong>Bawahan <br> Skala (1-5)</strong></div></td>
+    <td style="width: 5%;" rowspan="3"><div align="center"><strong>Akhir <br> Skala (1-5)</strong></div></td>
+    <td style="width: 5%;" rowspan="3"><div align="center"><strong>Score <br> Akhir</strong></div></td>
   </tr>
   <tr>
-    <td><div align="center"><strong>A</strong></div></td>
-    <td><div align="center"><strong>B</strong></div></td>
-    <td><div align="center"><strong>Semester 1</strong></div></td>
-    <td><div align="center"><strong>Semester 2 (C)</strong></div></td>
-    <td><div align="center"><strong>SM1</strong></div></td>
-    <td><div align="center"><strong>SM2</strong></div></td>
-    <td><div align="center"><strong>C / B</strong></div></td>
-    <td><div align="center"><strong>D1</strong></div></td>
-    <td><div align="center"><strong>D2</strong></div></td>
-    <td><div align="center"><strong>D3</strong></div></td>
-    <td class="text-center"><strong>D3 x A</strong></td>
+    <td colspan="2"><div align="center"><strong>Semester</strong></div></td>
+    <td colspan="2"><div align="center"><strong>Semester</strong></div></td>
+    <td rowspan="2"><div align="center"><strong>Nilai</strong></div></td>
   </tr>
+
+  <tr>
+    <td><div align="center"><strong>1</strong></div></td>
+    <td><div align="center"><strong>2</strong></div></td>
+    <td><div align="center"><strong>1</strong></div></td>
+    <td><div align="center"><strong>2</strong></div></td>
+    
+  </tr>
+
+
+
   <tr>
     <td colspan="18" bgcolor="#CCCCCC" style="border-top:3px double #000000"><strong>A. RESULT</strong></td>
   </tr>
@@ -274,10 +277,12 @@ table td{
       else{
         $SQL    = "SELECT activity_id,tbl_kpi_activity_plan.KPIID AS KPIID,ItemID,Description,UoM,DD,EveryMonth,Bobot_A,Plan_B,SM1,SM2,Nilai_Skala_Karyawan,Nilai_Skala_Atasan, ((SM2)/Plan_B)*100 AS Achieve, (SM1/(Plan_B))*100 AS AchSM1, (SM2/(Plan_B))*100 AS AchSM2, MonRemarks, MonRemarksAtasan, photo 
                  FROM tbl_kpi_activity_plan INNER JOIN  tbl_kpi_header_form ON tbl_kpi_header_form.KPIID=tbl_kpi_activity_plan.KPIID 
-                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=1 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."')";
+                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=1 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."' OR iAtasanNIK2='".$session_nik."')";
+
         $query  = $this->db->query($SQL);
       }
       
+
 
       /*
   		$query = $this->db->select('activity_id,tbl_kpi_activity_plan.KPIID AS KPIID,ItemID,Description,UoM,DD,EveryMonth,Bobot_A,Plan_B,SM1,SM2,Nilai_Skala_Karyawan,Nilai_Skala_Atasan, ((SM1+SM2)/Plan_B)*100 AS Achieve')
@@ -293,6 +298,7 @@ table td{
         $total_score_1 = 0;
         $average_A1 = 0;
         $num_row_A1 = $query->num_rows();
+
         foreach($query->result() as $data){ 
         	$total_bobot_1 += $data->Bobot_A;
           //$nilai_akhir = number_format(($crud->set_nilai_skala($data->Achieve) + $data->Nilai_Skala_Atasan)/2,1);
@@ -300,6 +306,8 @@ table td{
           $score_akhir = ($nilai_akhir * $data->Bobot_A)/100;
           $total_score_1 += $score_akhir;
           $average_A1 += $data->Achieve;
+
+
 
           if($no % 2 == 1){
               $erow = 'erow';
@@ -339,7 +347,7 @@ table td{
           <td class="text-center"><?php echo number_format($data->Achieve,0) ?></td>
           <td class="text-left notes"><?php echo $data->MonRemarks ?></td>
           <td class="text-center"><?php echo $crud->set_nilai_skala($data->Achieve) ?></td>			    
-			    <td class="text-center" width="5%"><?php echo $data->Nilai_Skala_Atasan ?></td>			    
+			    <td class="text-center <?php if($data->Nilai_Skala_Atasan=='0'){ echo 'bg-danger'; } else { echo $data->Nilai_Skala_Atasan; } ?>" width="5%" ><?php echo $data->Nilai_Skala_Atasan ?></td>			    
 			    <td class="text-center" width="5%"><?php echo $nilai_akhir;?></td>
 			    <td class="text-center" width="3%"><?php echo number_format($score_akhir,2);?></td>
 			    <td class="text-left notes"><?php echo $data->MonRemarksAtasan ?></td>
@@ -370,7 +378,7 @@ table td{
       else{
         $SQL    = "SELECT activity_id,tbl_kpi_activity_plan.KPIID AS KPIID,ItemID,Description,UoM,DD,EveryMonth,Bobot_A,Plan_B,SM1,SM2,Nilai_Skala_Karyawan,Nilai_Skala_Atasan, ((SM2)/Plan_B)*100 AS Achieve,(SM1/(Plan_B))*100 AS AchSM1, (SM2/(Plan_B))*100 AS AchSM2, MonRemarks, MonRemarksAtasan, photo 
                  FROM tbl_kpi_activity_plan INNER JOIN  tbl_kpi_header_form ON tbl_kpi_header_form.KPIID=tbl_kpi_activity_plan.KPIID 
-                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=2 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."')";
+                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=2 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."' OR iAtasanNIK2='".$session_nik."')";
         $query  = $this->db->query($SQL);
       }
   		
@@ -380,15 +388,17 @@ table td{
         $total_score_2 = 0;
         $average_A2 = 0;
         $num_row_A2 = $query->num_rows();
+
         foreach($query->result() as $data){
         	$total_bobot_2 += $data->Bobot_A;
           //$nilai_akhir = number_format(($crud->set_nilai_skala($data->Achieve) + $data->Nilai_Skala_Atasan)/2,1);
-          $nilai_akhir = number_format($data->Nilai_Skala_Atasan,1); //perubahan data tanpa akumulasi
+          $nilai_akhir = number_format($data->Nilai_Skala_Atasan,1); //perubahan data tanpa akumulasi          
           $score_akhir = ($nilai_akhir * $data->Bobot_A)/100;
           //$nilai_akhir = ($crud->set_nilai_skala($data->Achieve) + $data->Nilai_Skala_Atasan);
           //$score_akhir = ((($crud->set_nilai_skala($data->Achieve) + $data->Nilai_Skala_Atasan)* $data->Bobot_A)/100);
           $total_score_2 += $score_akhir;
           $average_A2 += $data->Achieve;
+
 
           if($no % 2 == 1){
               $erow = 'erow';
@@ -426,7 +436,7 @@ table td{
           <td class="text-center"><?php echo number_format($data->Achieve,0) ?></td>
 			    <td width="100"><?php echo $data->MonRemarks; ?></td>
 			    <td class="text-center"><?php echo $crud->set_nilai_skala($data->Achieve) ?></td>  
-			    <td class="text-center"><?php echo $data->Nilai_Skala_Atasan ?></td>
+			    <td class="text-center <?php if($data->Nilai_Skala_Atasan=='0'){ echo 'bg-danger'; } else { echo $data->Nilai_Skala_Atasan; } ?>"><?php echo $data->Nilai_Skala_Atasan ?></td>
 			    <td class="text-center"><?php echo $nilai_akhir;?></td>
           <td class="text-center"><?php echo number_format($score_akhir,2);?></td>
 			    <td class="text-left notes"><?php echo $data->MonRemarksAtasan ?></td>
@@ -454,7 +464,7 @@ table td{
       else{
         $SQL    = "SELECT activity_id,tbl_kpi_activity_plan.KPIID AS KPIID,ItemID,Description,UoM,DD,EveryMonth,Bobot_A,Plan_B,SM1,SM2,Nilai_Skala_Karyawan,Nilai_Skala_Atasan, ((SM2)/Plan_B)*100 AS Achieve, (SM1/(Plan_B))*100 AS AchSM1, (SM2/(Plan_B))*100 AS AchSM2, MonRemarks, MonRemarksAtasan, photo 
                  FROM tbl_kpi_activity_plan INNER JOIN  tbl_kpi_header_form ON tbl_kpi_header_form.KPIID=tbl_kpi_activity_plan.KPIID 
-                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=3 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."')";
+                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=3 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."' OR iAtasanNIK2='".$session_nik."')";
         $query  = $this->db->query($SQL);
       }
   		
@@ -511,7 +521,7 @@ table td{
           <td class="text-center"><?php echo number_format($data->Achieve,0) ?></td>
 			    <td width="100"><?php echo $data->MonRemarks; ?></td>
 			    <td class="text-center"><?php echo $crud->set_nilai_skala($data->Achieve) ?></td>  
-			    <td class="text-center"><?php echo $data->Nilai_Skala_Atasan ?></td>
+			    <td class="text-center <?php if($data->Nilai_Skala_Atasan=='0'){ echo 'bg-danger'; } else { echo $data->Nilai_Skala_Atasan; } ?>"><?php echo $data->Nilai_Skala_Atasan ?></td>
 			    <td class="text-center"><?php echo $nilai_akhir;?></td>
           <td class="text-center"><?php echo number_format($score_akhir,2);?></td>
 			    <td class="text-left notes"><?php echo $data->MonRemarksAtasan ?></td>
@@ -603,7 +613,7 @@ table td{
       else{
         $SQL    = "SELECT activity_id,tbl_kpi_activity_plan.KPIID AS KPIID,ItemID,Description,UoM,DD,EveryMonth,Bobot_A,Plan_B,SM1,SM2,Nilai_Skala_Karyawan,Nilai_Skala_Atasan, ((SM2)/Plan_B)*100 AS Achieve, (SM1/(Plan_B))*100 AS AchSM1, (SM2/(Plan_B))*100 AS AchSM2, MonRemarks, MonRemarksAtasan, photo 
                  FROM tbl_kpi_activity_plan INNER JOIN  tbl_kpi_header_form ON tbl_kpi_header_form.KPIID=tbl_kpi_activity_plan.KPIID 
-                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=4 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."')";
+                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=4 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."' OR iAtasanNIK2='".$session_nik."')";
         $query  = $this->db->query($SQL);
       }
       
@@ -657,7 +667,7 @@ table td{
           <td class="text-center"><?php echo number_format($data->Achieve,0) ?></td>
           <td width="100"><?php echo $data->MonRemarks; ?></td>
           <td class="text-center"><?php echo $crud->set_nilai_skala($data->Achieve) ?></td>  
-          <td class="text-center"><?php echo $data->Nilai_Skala_Atasan ?></td>
+          <td class="text-center <?php if($data->Nilai_Skala_Atasan=='0'){ echo 'bg-danger'; } else { echo $data->Nilai_Skala_Atasan; } ?>"><?php echo $data->Nilai_Skala_Atasan ?></td>
           <td class="text-center"><?php echo $nilai_akhir;?></td>
           <td class="text-center"><?php echo number_format($score_akhir,2);?></td>
           <td class="text-left notes"><?php echo $data->MonRemarksAtasan ?></td>
@@ -741,7 +751,7 @@ table td{
       else{
         $SQL    = "SELECT activity_id,tbl_kpi_activity_plan.KPIID AS KPIID,ItemID,Description,UoM,DD,EveryMonth,Bobot_A,Plan_B,SM1,SM2,Nilai_Skala_Karyawan,Nilai_Skala_Atasan, ((SM2)/Plan_B)*100 AS Achieve, (SM1/(Plan_B))*100 AS AchSM1, (SM2/(Plan_B))*100 AS AchSM2, MonRemarks, MonRemarksAtasan, photo 
                  FROM tbl_kpi_activity_plan INNER JOIN  tbl_kpi_header_form ON tbl_kpi_header_form.KPIID=tbl_kpi_activity_plan.KPIID 
-                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=5 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."')";
+                 WHERE tbl_kpi_activity_plan.KPIID='".$primary_key."' AND ItemID=5 AND (EmployeeID='".$session_nik."' OR iAtasanNIK='".$session_nik."' OR iAtasanNIK2='".$session_nik."')";
         $query  = $this->db->query($SQL);
       }
       
@@ -795,7 +805,7 @@ table td{
           <td class="text-center"><?php echo number_format($data->Achieve,0) ?></td>
           <td width="100"><?php echo $data->MonRemarks; ?></td>
           <td class="text-center"><?php echo $crud->set_nilai_skala($data->Achieve) ?></td>  
-          <td class="text-center"><?php echo $data->Nilai_Skala_Atasan ?></td>
+          <td class="text-center <?php if($data->Nilai_Skala_Atasan=='0'){ echo 'bg-danger'; } else { echo $data->Nilai_Skala_Atasan; } ?>"><?php echo $data->Nilai_Skala_Atasan ?></td>
           <td class="text-center"><?php echo $nilai_akhir;?></td>
           <td class="text-center"><?php echo number_format($score_akhir,2);?></td>
           <td class="text-left notes"><?php echo $data->MonRemarksAtasan ?></td>
@@ -868,6 +878,9 @@ table td{
 
     //$total_score_all = ($total_score_1+$total_score_2+$total_score_3+$total_score_4+$total_score_5);
     $total_score_all = ($__bobot_nilai_A + $__bobot_nilai_B + $__bobot_nilai_C);
+    if(!$crud->cek_nilai_0($primary_key)){
+      $total_score_all = 0;
+    }
 
   ?>
   <tr>   
@@ -881,7 +894,9 @@ table td{
     
     //$total_score_all = ($total_score_1+$total_score_2+$total_score_3+$total_score_4); 
     $total_score_all = ($__bobot_nilai_A + $__bobot_nilai_B);
-
+    if(!$crud->cek_nilai_0($primary_key)){
+      $total_score_all = 0;
+    }
   ?>
 
   <tr >
@@ -892,20 +907,37 @@ table td{
   </tr>
 
 <?php } 
+  
+  
+   if(!$crud->cek_nilai_0($primary_key)){
+      $crud->update_status_proses($primary_key, $column='iAgree2', 1);
+    } else {
+      $crud->update_status_proses($primary_key, $column='iAgree2', 2);
+    }
 
-$crud->update_total_score($primary_key, $column='total_score', number_format($total_score_all,2));
-
+   $crud->update_total_score($primary_key, $column='total_score', number_format($total_score_all,2));  
 
 ?>
 
   <tr>
-    <td colspan="13" height="35" class="text-right" style="border-bottom:none !important; font-weight:bold; padding-right:5px"><font size="2"></font></td>
-    <td colspan="4" class="text-center" bgcolor="#000000" style="color:#FFFFFF"><font size="4"><strong><?php echo $crud->set_nilai_akhir_pa(number_format($total_score_all,2)); ?></strong></font></td>
+    <td colspan="13" height="35" class="text-left" style="border-bottom:none !important; font-weight:bold; padding-left: 5px">
+      <font size="2"><u>SECOND LAYER APPROVEMENT STATUS : </u></font>
+    </td>
+    <td colspan="4" class="text-center" bgcolor="#000000" style="color:#FFFFFF"><font size="4"><strong>
+      <?php
+        if(!$crud->cek_nilai_0($primary_key)){
+          echo '- Incomplete -'; 
+        } else {
+          echo $crud->set_nilai_akhir_pa(number_format($total_score_all,2));          
+        }
+      ?></strong></font></td>
     <td>&nbsp;</td>
   </tr>
   
   <tr>
-    <td colspan="13" style="border-top:none !important">&nbsp;</td>
+    <td colspan="13" style="border-top:none !important; font-size: 13px;">
+        <?php echo $crud->cek_status_secondlayer($primary_key); ?>
+    </td>
     <td colspan="5">
         <!--
           <table width="100%" border="0" cellspacing="2" cellpadding="3">
@@ -1580,7 +1612,11 @@ function callback_monitor_global(primary_key, type){
             $('#modal_monitor_global [name="KPIID"]').val(primary_key);
             $('#modal_monitor_global [name="ItemID"]').val(type);
 
-            if(data.session_nik != data.session_nik_atasan && data.performance_management == 0){                
+
+            if( (data.key_agree2 == 3)){                
+                show_modal_dialog_warning(title='ERROR...', content='<i class="glyphicon glyphicon-remove"></i> Form sudah di approve oleh Second Layer...','modal modal-success');
+            }
+            else if(data.session_nik != data.session_nik_atasan && data.performance_management == 0){                
                 show_modal_dialog_warning(title='ERROR...', content='<i class="glyphicon glyphicon-remove"></i> Anda bukan atasan karyawan yang bersangkutan...','modal modal-success');
             }
             else if(data.key_agree == 0){                
@@ -1678,6 +1714,13 @@ function callback_monitor_global(primary_key, type){
             component += '</br>';
             component += '<input type="checkbox" name="email_notif_global_tome" checked value="1"> Kirim email notifikasi ke saya juga.';
 
+            if( (data.key_agree2 == 4)){                
+                component += '</br>';
+                component += '<input type="checkbox" name="apvsecondlayer" value="1"> Proses Ke Second Layer.';
+            }
+
+
+            
             $('#modal_monitor_global .form-body').html(component);                       
 
         },
@@ -1812,6 +1855,9 @@ function save_monitoring(){
     url = "<?php echo site_url('development/user_key_performance_indicator/plan_monitoring_update')?>";
 
     var formData = new FormData($('#form_monitoring')[0]);
+
+    //alert(JSON.stringify(formData)); 
+
     // ajax adding data to database
     $.ajax({
         url : url,
@@ -1971,6 +2017,8 @@ function save_form_monitor_global(){
     url = "<?php echo site_url('development/user_key_performance_indicator/ajax_save_form_monitor_global')?>";
 
     var formData = new FormData($('#form_monitor_global')[0]);
+
+
     // ajax adding data to database
     $.ajax({
         url : url,

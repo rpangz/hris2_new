@@ -468,7 +468,7 @@ while ($rows2 = mysql_fetch_array($query2)){
 //================================================== PENAMBAHAN JIKA HUTANG CUTI TIDAK TERPOTONG PADA SAAT ULANG TAHUN CUTI =========================================
 
 $hutangcuti 	=  "SELECT * FROM tbl_hakcuti a, tbl_formcuti b WHERE a.nik=b.formcutinik AND HakCutiId=0
-AND JenisCuti=1 AND StatusForm='A' AND Apv3='A' AND Periode1 >= DATE_ADD(NOW(), INTERVAL -1 MONTH)";
+AND JenisCuti=1 AND StatusForm='A' AND Apv3='A' AND Periode1 >= DATE_ADD(NOW(), INTERVAL -1 MONTH) AND a.jenishakcuti = 1";
 $rows_data2 				= mysql_query($hutangcuti);
 $totaldatahutangcuti 	    = mysql_num_rows($rows_data2);
 
@@ -585,7 +585,7 @@ if($totaldatahutangcuti>0){
 		mysql_query("
 		UPDATE tbl_hakcuti a, tbl_formcuti b
 		SET HakCutiId=HakId
-		WHERE a.nik=b.formcutinik AND HakCutiId=0 AND JenisCuti=1 AND StatusForm='A' AND Apv3='A' AND Periode1 >= DATE_ADD(NOW(), INTERVAL -1 MONTH)
+		WHERE a.nik=b.formcutinik AND HakCutiId=0 AND JenisCuti=1 AND StatusForm='A' AND Apv3='A' AND Periode1 >= DATE_ADD(NOW(), INTERVAL -1 MONTH) AND a.jenishakcuti = 1
 		");		
 
 }

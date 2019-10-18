@@ -1341,24 +1341,39 @@ class frmProfile extends CMS_Priv_Strict_Controller {
                 WHERE iTransNik = ".$nik." AND bTransStatus = 0";
 
         $query = $this->dbemsa->query($SQL);
-        foreach ($query->result() as $row)
-        {
-                $Tagging = $row->cSTokNewTag;
-                $TaggingOld = $row->cSTokOldTag;
-                $Item =  $row->Item;
-                $OS =  $row->OS;   
-                $cProcessorName =  $row->cProcessorName;   
-                $cRAMName =  $row->cRAMName;   
-                $iHDCapacity =  $row->iHDCapacity;            
-                $TransID =  $row->iTransID;
-                $Spesification = 'Processor '.$row->cProcessorName.' '.$row->cStokProcSpeed.'<br/>Memory '.$row->cRAMName.' HDD'.$row->iHDCapacity;                
+        $total = $query->num_rows();
+
+        if($total>0) {
+           foreach ($query->result() as $row)
+            {
+                    $Tagging = $row->cSTokNewTag;
+                    $TaggingOld = $row->cSTokOldTag;
+                    $Item =  $row->Item;
+                    $OS =  $row->OS;   
+                    $cProcessorName =  $row->cProcessorName;   
+                    $cRAMName =  $row->cRAMName;   
+                    $iHDCapacity =  $row->iHDCapacity;            
+                    $TransID =  $row->iTransID;
+                    $Spesification = 'Processor '.$row->cProcessorName.' '.$row->cStokProcSpeed.'<br/>Memory '.$row->cRAMName.' HDD'.$row->iHDCapacity;                
+            } 
+        } else {
+            $Tagging = '- No Data -';
+            $TaggingOld = '- No Data -';
+            $Item =  '- No Data -';
+            $OS =  '- No Data -';   
+            $cProcessorName =  '- No Data -';   
+            $cRAMName =  '- No Data -';   
+            $iHDCapacity =  '- No Data -';            
+            $TransID =  '- No Data -';
+            $Spesification = '- No Data -';
         }
+        
 
         //$TransID = 2360;
         $options['softwarestd'] = array();
         $options['softwarenonstd'] = array();
         $SQLSoft = "SELECT b.Description,b.Standard FROM tbl_transdetail_soft a
-                    LEFT JOIN tbl_tools b ON a.iTSToolId=b.ToolsID  WHERE iTSTransID = ".$TransID;
+                    LEFT JOIN tbl_tools b ON a.iTSToolId=b.ToolsID  WHERE iTSTransID = '".$TransID."'";
         $query = $this->dbemsa->query($SQLSoft);
         $software = "";
         $datasoft = 0;

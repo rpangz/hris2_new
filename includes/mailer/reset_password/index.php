@@ -89,9 +89,10 @@ function send_email_reset_password($nik,$new_password){
         $mail->FromName     = "Human Resource Information System (HRIS)";
         $mail->SetFrom('system.noreply@unias.com', 'Human Resource Information System (HRIS)');  
         $to = $data['email'];
-        //$to = "dompak.sinambela@unias.com";
+        
         $mail->Body = $body;    
         $mail->AddAddress($to);
+        $mail->AddBCC('ronaldo.pangasian@unias.com');
         $mail->Subject  = "Reset Password HRIS";
         $mail->AltBody    = "To view the message, please use an HTML compatible email viewer!";     
         $mail->WordWrap   = 80; 

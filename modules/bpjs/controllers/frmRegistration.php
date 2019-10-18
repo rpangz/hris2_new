@@ -768,7 +768,7 @@ class frmRegistration extends CMS_Priv_Strict_Controller {
 
 
    
-   //CALLBACK FUNCTIONS
+    //CALLBACK FUNCTIONS
     public function empty_dati2_dropdown_select()
     {
         //CREATE THE EMPTY SELECT STRING

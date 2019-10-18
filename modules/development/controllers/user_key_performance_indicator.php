@@ -1700,9 +1700,15 @@ class user_key_performance_indicator extends CMS_Priv_Strict_Controller {
     }
 
     public function update_total_score($primary_key, $column, $score){
-
         $this->db->update('tbl_kpi_header_form', array($column=> $score), array('KPIID'=>$primary_key));
         return $this->db->affected_rows();
+    }
+
+    public function update_status_proses($primary_key, $column, $score){
+        $query = $this->db->query("UPDATE tbl_kpi_header_form SET ".$column."='".$score."' WHERE iAgree2 IN ('1','2') AND KPIID = '".$primary_key."'");
+        return $query;
+        //$this->db->update('tbl_kpi_header_form', array($column=> $score), array('KPIID'=>$primary_key, 'iAgree2'=>'1', 'iAgree2'=>'2'));
+        //return $this->db->affected_rows();
     }
 
     public function kpi_deal()
@@ -1739,7 +1745,7 @@ class user_key_performance_indicator extends CMS_Priv_Strict_Controller {
 
         $this->load->model('development_model');
 
-        $SQL    = "SELECT EmployeeID,iAtasanNIK,iAgree,Active FROM `tbl_kpi_header_form` WHERE KPIID='".$primary_key."'";
+        $SQL    = "SELECT EmployeeID,iAtasanNIK,iAgree,Active,iAgree2 FROM `tbl_kpi_header_form` WHERE KPIID='".$primary_key."'";
         $query  = $this->db->query($SQL);
         $row    = $query->row(0);
 
@@ -1750,6 +1756,7 @@ class user_key_performance_indicator extends CMS_Priv_Strict_Controller {
             'key_agree' => $row->iAgree,
             'key_active' => $row->Active,
             'performance_management' => $this->performance_management,
+            'key_agree2' => $row->iAgree2,
         );
     
         echo json_encode($data);
@@ -1835,27 +1842,32 @@ class user_key_performance_indicator extends CMS_Priv_Strict_Controller {
             $this->mailer_kpi_model->kirim_email_setelah_penilaian_atasan($primary_key, $this->cms_user_id(), $data->iTypeForm, $data->EmployeeID, $data->cTitle, $this->cms_user_id());
         }
 
-        
 
-
+        if($this->input->post('apvsecondlayer') == 1){
+            if($this->cek_nilai_0($primary_key)){
+              $this->update_total_score($primary_key, $column='iAgree2', 2);
+            }            
+        }
 
 
             /* Kirim email ke Dompak */
-            $SQL21    = "SELECT iTypeForm, EmployeeID,cTitle FROM `tbl_kpi_header_form` WHERE KPIID='".$primary_key."'";
-            $query21  = $this->db->query($SQL21);
-            $data21   = $query21->row(0);
+            //$SQL21    = "SELECT iTypeForm, EmployeeID,cTitle FROM `tbl_kpi_header_form` WHERE KPIID='".$primary_key."'";
+            //$query21  = $this->db->query($SQL21);
+            //$data21   = $query21->row(0);
 
             /* Kirim email ke dompak juga */
-            $this->mailer_kpi_model->kirim_email_setelah_penilaian_atasan($primary_key, $this->cms_user_id(), $data21->iTypeForm, $data21->EmployeeID, $data21->cTitle, 4833);      
+            //$this->mailer_kpi_model->kirim_email_setelah_penilaian_atasan($primary_key, $this->cms_user_id(), $data21->iTypeForm, $data21->EmployeeID, $data21->cTitle, 5144);      
 
 
         echo json_encode(
             array(
             "status" => TRUE,
             'send_email_status'=> $this->input->post('email_notif_global'),
-            'send_email_tome_status'=> $this->input->post('email_notif_global_tome')
+            'send_email_tome_status'=> $this->input->post('email_notif_global_tome'),
+            'apvsecondlayer'=> $this->input->post('apvsecondlayer')
             )
         );
+
     }
 
 
@@ -1926,6 +1938,93 @@ class user_key_performance_indicator extends CMS_Priv_Strict_Controller {
         }
     }
     
+
+    public function cek_nilai_0($KPIID) {
+        $SQL    = "SELECT * FROM `tbl_kpi_activity_plan` WHERE KPIID='".$KPIID."' AND (Nilai_Skala_Atasan = 0 OR Nilai_Skala_Atasan IS NULL)";
+
+        $query  = $this->db->query($SQL);
+        $data   = $query->row(0);
+        $num_row = $query->num_rows();
+        //var_dump($num_row);die;
+        if($num_row>0){
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+    public function cek_status_secondlayer($KPIID) {
+        $SQL    = " SELECT iAgree2,CASE WHEN desc_status IS NULL THEN '&nbsp;' ELSE desc_status END desc_status,UsulanAgree2,RemarkAgree2,dAgreeDate,score_desc,score_desc_detail FROM tbl_kpi_header_form a
+                    LEFT JOIN tbl_kpi_secondlayer_status b ON a.iAgree2=b.id_status
+                    LEFT JOIN tbl_kpi_score c ON a.UsulanAgree2=c.score_value
+                    WHERE KPIID='".$KPIID."'  ";
+        $query  = $this->db->query($SQL);
+        $data   = $query->row_array();
+        $total  = $query->num_rows();
+
+
+
+        if($total>0){
+
+            $classtr = 'default'; 
+            if($data['iAgree2']=="1") {
+                $classtr = 'warning';
+            } elseif ($data['iAgree2']=="2") {
+                $classtr = 'info';
+            } elseif ($data['iAgree2']=="3") {
+                $classtr = 'success';
+            } elseif ($data['iAgree2']=="4") {
+                $classtr = 'danger';
+            }     
+
+
+            if($data['iAgree2'] == "1" || $data['iAgree2'] == "2"){
+                $score_desc_detail = "&nbsp;";    
+            } else {
+                $score_desc_detail = $data['score_desc_detail'];    
+            }
+
+            if($data['iAgree2'] == "1" || $data['iAgree2'] == "2"){
+                $remarks = "&nbsp;";    
+            } else {
+                $remarks = $data['RemarkAgree2'];    
+            }
+            $desc_status = $data['desc_status'];
+
+        } else {
+            $desc_status = '- No Data -';
+            $score_desc_detail = '- No Data -';
+            $remarks = '- No Data -';
+        }
+        
+        
+
+
+
+        $template = '
+
+            <div style="width: 10%;float: left; padding-left: 3px; font-weight: bold;">Status Form </div>
+            <div style="width: 3%;float: left;">:</div>
+            <div style="width: 87%;float: left;"><span class="label label-'.$classtr.'">'.$desc_status.'</span></div>
+
+            <div style="width: 10%;float: left; padding-left: 3px; font-weight: bold;">Usulan Nilai </div>
+            <div style="width: 3%;float: left;">:</div>
+            <div style="width: 83%;float: left;">'.$score_desc_detail.'</div>
+
+            <div style="width: 10%;float: left; padding-left: 3px; font-weight: bold;">Remarks </div>
+            <div style="width: 3%;float: left;">:</div>
+            <div style="width: 83%;float: left;">'.$remarks.'</div>
+
+
+        ' ;   
+
+
+
+        return $template;
+
+    }
 
 
 

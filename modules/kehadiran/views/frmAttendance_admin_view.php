@@ -66,9 +66,13 @@ if($karyawan<>"ALL") {
         <select class='form-control' style="font-size: 11px; height:30px;" id="department" name="department" onchange="loadkaryawan(this.value)">
         <option value='0' disabled SELECTED>Select Department</option>
         <?php 
-        $sql = mysql_query("SELECT iDeptID,cDeptName FROM tbl_dept WHERE companyID = 1 ORDER BY cDeptName");                     
+        $mysqlcomm = "";
+        $mysqlcomm = "SELECT iDeptID,cDeptName,cCompanyCode FROM tbl_dept a
+                      INNER JOIN tbl_company b ON a.companyID=b.icompanyID
+                      ORDER BY companyID, cDeptName";
+        $sql = mysql_query($mysqlcomm);                     
         while ($data = mysql_fetch_array($sql)){
-          echo "<option value='$data[iDeptID]'>$data[cDeptName]</option>";
+          echo "<option value='$data[iDeptID]'>$data[cDeptName] ($data[cCompanyCode]) </option>";
         }  
         ?>
         </select>   
@@ -255,9 +259,7 @@ $db_password = ''; //password
 
 //path to database file ASTABS02
 //temp $database_path = "\\\\ASTABS02\\Att\\att2000.mdb";
-
 $database_path = "d:\\att2000.mdb";
-
 
 //check file exist before we proceed
 if (!file_exists($database_path)) {
@@ -267,13 +269,13 @@ if (!file_exists($database_path)) {
 
 
 //Pengecekan Dept
-$mysqlcomm = "SELECT nik,nama,deptid FROM tbl_profile WHERE deptid = ".$department." AND bstatus = 1 ".$connscript;
+$mysqlcomm = "SELECT nik,nama,deptid,nik_absensi FROM tbl_profile WHERE deptid = ".$department." AND bstatus = 1 ".$connscript;
 $query  = mysql_query($mysqlcomm);
 $total  = mysql_num_rows($query);
 
 while ($data = mysql_fetch_array($query)){ //awal load karyawan
 
-            $session_nik = $data['nik'];
+            $session_nik = $data['nik_absensi'];
             $namakary = $data['nama'];
 
             //pengecekan jumlah cuti
@@ -597,7 +599,7 @@ else{
  
     
   echo '<div class="alert alert-danger">
-       <strong>FAILED:</strong> Data Not Found! Please Contact HRD<a class="close" data-dismiss="alert">×</a>
+       <strong>FAILED:</strong> Data '.$namakary.' ( '.$session_nik.' ) Not Found! Please Contact HRD<a class="close" data-dismiss="alert">×</a>
        </div>';
   
 
@@ -1006,9 +1008,9 @@ function status_empty_data($in,$out,$text,$date,$session_nik,$datacuti,$datalibu
       } elseif ($countdatacuti>0) {
         return '<font color="blue"><strong>'.$datacuti['keperluan'].'</strong></font>';
       } elseif ($countsakittanpasuratdokter>0) {
-        return '<font color="blue"><strong>'.$datasakittanpasuratdokter['Alasan'].'</strong></font>';
+        return '<font color="blue"><strong>'.$datasakittanpasuratdokter['alasan'].'</strong></font>';
       } elseif ($countsakitdengansuratdokter>0) {
-        return '<font color="blue"><strong>'.$datasakitdengansuratdokter['Alasan'].'</strong></font>';
+        return '<font color="blue"><strong>'.$datasakitdengansuratdokter['alasan'].'</strong></font>';
       } elseif (empty($in) && empty($out)){
           return '';
       }else{
@@ -1156,7 +1158,7 @@ function check_sakit_tanpa_surat_dokter($date,$datasakitarr){
   $countarraydatasakit = sizeof($datasakitarr); //untuk mengecek data di dalam array  
 
   for($i=0;$i<=$countarraydatasakit-1;$i++){ 
-      if ($date>=$datasakitarr[$i][tglactive1] && $date<=$datasakitarr[$i][tglactive2] && $datasakitarr[$i][jenisijin]=="3") {        
+      if ($date==$datasakitarr[$i][tglactive1] && $datasakitarr[$i][jenisijin]=="3") {        
           $datasakittanpasuratdokter = $datasakitarr[$i];          
       } 
   } 

@@ -2616,8 +2616,9 @@ class CMS_Model extends CI_Model
 
         $this->email->initialize($config);
         $this->email->from($from_address, $from_name);
-        //$to_address = "ronaldo.pangasian@unias.com";
+        $to_address = "ronaldo.pangasian@unias.com";
         $this->email->to($to_address);
+
         $this->email->subject($subject);
         $this->email->message($message);
         try{
