@@ -7,6 +7,7 @@
 
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
 $server_publish = 'apps.unias.com';
 
 $nikki = $this->input->get('nik');
@@ -54,8 +55,7 @@ function format_tanggal_id($date){
 }
 
 if (is_null($nikki) || $nikki =='' || $nikki ==0){
-  echo preg_replace_callback('/(<option[^<>]*>)(.*?)(<\/option>)/si', '__ommit_nbsp', $output);
-          
+  echo preg_replace_callback('/(<option[^<>]*>)(.*?)(<\/option>)/si', '__ommit_nbsp', $output);          
 }else{
   $tampil   = mysql_query("SELECT * FROM tbl_profile LEFT JOIN 
       tbl_company ON tbl_profile.CompanyId=tbl_company.iCompanyId LEFT JOIN 
@@ -698,6 +698,19 @@ pageTracker._trackPageview();
 if(isset($dropdown_setup)) {
   $this->load->view('dependent_dropdown', $dropdown_setup);
 }
+
+if(isset($dropdown_setup2)) {
+  $this->load->view('dependent_dropdown_provinsi', $dropdown_setup2);
+}
+
+if(isset($dropdown_setup3)) {
+  $this->load->view('dependent_dropdown_provinsi_dom', $dropdown_setup3);
+}
+
+if(isset($dropdown_setup4)) {
+  $this->load->view('dependent_dropdown_provinsi_NPWP', $dropdown_setup4);
+}
+
 ?>
 
 <style type="text/css">
@@ -1277,4 +1290,160 @@ function handleChange2(input) {
     return ;
 
 }
+
+
+$(document).ready(function () {
+    $('#field-Status').change(function () {
+        var status    = $('#field-Status').val();
+        $.ajax({
+            url : "<?php echo site_url('karyawan/frmKaryawanAstel/get_lamakontrak/')?>/"+status,
+            type: "GET", 
+            dataType: "JSON",           
+            success: function(data)
+            {                               
+                $('#lamakontrak').empty();
+                $.each(data,function(key, value)
+                {
+                    $('#lamakontrak').append('<option value=' + value.value + '>' + value.property + '</option>'); // return empty
+                    $('#lamakontrak').trigger("chosen:updated");
+                });
+                $('#lamakontrak').trigger("liszt:updated");
+                console.log(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+               //show_modal_dialog_warning(title='ERROR', 'Mohon dicoba kembali...');
+               show_modal_dialog_warning(title='ERROR', errorThrown);
+               //alert('Error ajax data');
+            }
+        });
+    });
+
+
+    //UNTUK END KONTRAK
+     $('#field-endkontrak').change(function () {
+        var lamakontrak    = $('#lamakontrak').val();
+        var tglmasuk       = $('#field-TglMasuk').val();
+        var tglendkontrak  = $('#field-endkontrak').val();
+        $.ajax({
+            url : "<?php echo site_url('karyawan/frmKaryawanAstel/check_endkontrak/')?>/?lamakontrak="+lamakontrak+"&tglmasuk="+tglmasuk+"&tglendkontrak="+tglendkontrak,
+            type: "GET",                 
+            success: function(data)
+            {       
+                var res    = data.split("|");
+                var error  = res[0];
+                var errmsg = res[1];
+
+                if(error){
+                    alert(errmsg);
+                    $('#field-endkontrak').val('');
+                }                          
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+               //show_modal_dialog_warning(title='ERROR', 'Mohon dicoba kembali...');
+               alert('ERROR ( '+errorThrown+ ' )');
+               //alert('Error ajax data');
+            }
+        });
+    });
+
+     $('#lamakontrak').change(function () {
+        var lamakontrak    = $('#lamakontrak').val();
+        var tglmasuk       = $('#field-TglMasuk').val();
+        $.ajax({
+            url : "<?php echo site_url('karyawan/frmKaryawanAstel/set_endkontrak/')?>/?lamakontrak="+lamakontrak+"&tglmasuk="+tglmasuk,
+            type: "GET",                 
+            success: function(data)
+            {       
+                var res    = data.split("|");
+                var error  = res[0];
+                var hasil = res[1];
+
+                if(error){
+                    alert(hasil);
+                    $('#field-endkontrak').val('');
+                } else {
+                    $('#field-endkontrak').val(hasil);        
+                }     
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+               //show_modal_dialog_warning(title='ERROR', 'Mohon dicoba kembali...');
+               alert('ERROR ( '+errorThrown+ ' )');
+               //alert('Error ajax data');
+            }
+        });
+    });
+
+    $('#field-TglMasuk').change(function () {
+        $('#field-endkontrak').val('');
+    }); 
+
+
+    $('#NoKTP').change(function () {
+        var NoKTP    = $('#NoKTP').val();
+        var total    = NoKTP.length;
+
+        if(total!=16){
+            alert("No KTP Tidak Valid !");
+            $('#NoKTP').val('');
+        }
+        
+        
+    }); 
+
+    $('#NoKK').change(function () {
+        var NoKK    = $('#NoKK').val();
+        var total    = NoKK.length;
+        
+        if(total!=16){
+            alert("No KK Tidak Valid !");
+            $('#NoKK').val('');
+        }
+    }); 
+
+    $('#NoNPWP').change(function () {
+        var NoNPWP    = $('#NoNPWP').val();
+        var total    = NoNPWP.length;
+        
+        if(total!=15){
+            alert("No NPWP Tidak Valid !");
+            $('#NoNPWP').val('');
+        }
+    });
+
+    $('#norek').change(function () {
+        var norek    = $('#norek').val();
+        var total    = norek.length;
+        
+        if(total!=10){
+            alert("No Rekening Tidak Valid !");
+            $('#norek').val('');
+        }
+    });
+
+    $('#NIK').change(function () {
+        var NIK    = $('#NIK').val();
+        var total    = NIK.length;
+        
+        if(total>0){        
+            $('#NIK_Absensi').val(NIK);
+        } else {
+            $('#NIK_Absensi').val('');
+        }
+
+
+    }); 
+
+
+
+
+});
+
+
+
+
+</script>
 

@@ -80,6 +80,8 @@ body {font-family: Times New Roman;}
   border: 1px solid #ccc;
   border-top: none;
   animation: fadeEffect 1s;
+  width: 100%;
+  max-width: 100%;
 }
 
 @keyframes fadeEffect{
@@ -103,12 +105,13 @@ body {font-family: Times New Roman;}
 
 <style type="text/css">
       table.ReportTable {
-      font-family: "Times New Roman", Times, serif;
+      font-family: "Times New Roman", Times, serif;      
       border: 2px solid #A40808;
-      background-color: #EEE7DB;
-      width: 100%;
+      background-color: #EEE7DB;      
       text-align: left;
       border-collapse: collapse;
+      width: 100%;
+      max-width: 100%;
     }
     table.ReportTable td, table.ReportTable th {
       border: 1px solid #AAAAAA;

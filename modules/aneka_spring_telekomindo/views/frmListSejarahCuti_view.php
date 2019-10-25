@@ -180,7 +180,7 @@ function goToPage( id ) {
 
 <?php  
   
-    include ('./includes/frmListSejarahCuti_new.php');
+    include ('./includes/frmListSejarahCuti.php');
 
 ?>
 

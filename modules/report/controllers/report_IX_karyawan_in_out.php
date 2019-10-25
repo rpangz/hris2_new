@@ -817,18 +817,6 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
     }    
 
 
-    public function ajax_load_data_excell(){
-        $data         = $this->input->get('data');
-        $loaddata =  "                      
-                      header('Content-Type: application/vnd.ms-excel'); 
-                      header('Content-disposition: attachment; filename=AAA.xls');
-                      ";
-        $loaddata .= "TEST";
-        echo $loaddata; 
-
-    }
-
-
 
 
 
@@ -856,17 +844,24 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                           <button class="tablinks" onclick="openCity(event, \'bpjskesehatan\')">BPJS Kesehatan</button>
                           <button class="tablinks" onclick="openCity(event, \'bpjstk\')">BPJS Ketenagakerjaan</button>
                       </div>';
-        $exportlinkpayroll = site_url('report/report_IX_karyawan_in_out/ajax_load_data/').'?jenis='.$jenis.'&blnproses='.$blnproses;               
+
+
+        $exportlinkpayroll = site_url('report/report_IX_karyawan_in_out/loaddata_payroll_inout_excell/').'?jenis='.$jenis.'&blnproses='.$blnproses;
+        $exportlinkbpjskes = site_url('report/report_IX_karyawan_in_out/loaddata_bpjskes_inout_excell/').'?jenis='.$jenis.'&blnproses='.$blnproses;
+        $exportlinkbpjstk  = site_url('report/report_IX_karyawan_in_out/loaddata_bpjstk_inout_excell/').'?jenis='.$jenis.'&blnproses='.$blnproses;               
+
         $htmldata .= '<div id="payroll" class="tabcontent">
-                            <a href='.$exportlinkpayroll.'>Export Excell</a>    
+                            <a href='.$exportlinkpayroll.'><img src="https://'.$_SERVER['SERVER_NAME'].'/hris2/images/icn-excel.png" alt="Download Excel" width="25" class="img-responsive"/></a>    
                             '.$payroll.'
                       </div>';
 
         $htmldata .= '<div id="bpjskesehatan" class="tabcontent">
+                            <a href='.$exportlinkbpjskes.'><img src="https://'.$_SERVER['SERVER_NAME'].'/hris2/images/icn-excel.png" alt="Download Excel" width="25" class="img-responsive"/></a>
                           '.$bpjskesehatan.' 
                       </div>';
 
         $htmldata .= '<div id="bpjstk" class="tabcontent">
+                        <a href='.$exportlinkbpjstk.'><img src="https://'.$_SERVER['SERVER_NAME'].'/hris2/images/icn-excel.png" alt="Download Excel" width="25" class="img-responsive"/></a>
                         '.$bpjstk.'
                       </div>';
 
@@ -886,7 +881,8 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
              foreach ($querygroup->result() as $rowgroup) {
                 $headerpttitle = $rowgroup->cCompanyName;
                 $headerptid    = $rowgroup->CompanyID;
-                $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td><h4><u>'.$headerpttitle.'</u></h4></td></tr></table>';
+
+                $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td style="width: 100%;text-align: center;" colspan=10><h4><u>'.$headerpttitle.'</u></h4></td></tr></table>';
 
                 // KARYAWAN MASUK ========================================================================================================================
                 $scrgroupdetail   = '';
@@ -903,47 +899,47 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                     $htmldetail .= '<table class="ReportTable" id="datareport">
                                       <thead>
                                           <tr>
-                                              <th>NO</th>
-                                              <th>NIK</th>
-                                              <th>NAMA</th>
-                                              <th>STATUS</th>
-                                              <th>SEX</th>
-                                              <th>BD</th>
-                                              <th>JABATAN</th>
-                                              <th>TK/K</th>
-                                              <th>DIV / DEPT / </th>
-                                              <th>PER TGL</th>
-                                              <th>NO NPWP</th>
-                                              <th>NOREK BCA</th>
-                                              <th>CABANG</th>
-                                              <th>E-KTP</th>
+                                              <th style="width:5px;">NO</th>
+                                              <th style="width:20px;">NIK</th>
+                                              <th style="width:150px;">NAMA</th>
+                                              <th style="width:30px;">STATUS</th>
+                                              <th style="width:10px;">SEX</th>
+                                              <th style="width:15px;">BD</th>
+                                              <th style="width:100px;">JABATAN</th>
+                                              <th style="width:50px;">TK/K</th>
+                                              <th style="width:200px;">DIV / DEPT / </th>
+                                              <th style="width:70px;">PER TGL</th>
+                                              <th style="width:100px;">NO NPWP</th>
+                                              <th style="width:100px;">NOREK BCA</th>
+                                              <th style="width:70px;">CABANG</th>
+                                              <th style="width:100px;">E-KTP</th>                                            
                                           </tr>
                                       </thead>
                                       <tbody>';
                     $no = 0;                  
                     foreach ($querygroupdetail->result() as $rowgroupdetail) {
                         $no += 1;
-                        $htmldetail .= '<tr>
+                        $htmldetail .= '<tr>                                          
                                           <td>'.$no.'</td>
                                           <td>'.$rowgroupdetail->nik.'</td>
                                           <td>'.$rowgroupdetail->nama.'</td>
-                                          <td>'.$rowgroupdetail->lamakontrak.'</td>
-                                          <td>'.$rowgroupdetail->sex.'</td>
-                                          <td>'.$rowgroupdetail->bandskrg.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->lamakontrak.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->sex.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->bandskrg.'</td>
                                           <td>'.$rowgroupdetail->JobFungsionalName.'</td>
-                                          <td>'.$rowgroupdetail->TKINOUT.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->TKINOUT.'</td>
                                           <td>'.$rowgroupdetail->divdept.'</td>
-                                          <td>'.$this->date_format_txt($rowgroupdetail->TglMasuk).'</td>
-                                          <td>'.$rowgroupdetail->NoNPWP.'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->TglMasuk).'</td>
+                                          <td>'.$this->npwp_format_txt($rowgroupdetail->NoNPWP).'</td>
                                           <td>'.$rowgroupdetail->norek.'</td>
                                           <td>'.$rowgroupdetail->cabangrek.'</td>
-                                          <td>'.$rowgroupdetail->NoKTP.'</td>
-                                      </tr>
-                                      <tr>            
-                                          <td></td>    
-                                          <td colspan="7">Alamat KTP : Pinang Ranti RT 002, RW 002, Kel. Pinang Ranti, Kec. Makasar, Jakarta Timur, DKI Jakarta</td>
-                                          <td colspan="6">Alamat NPWP : Sama dengan KTP</td>
-                                      </tr>';     
+                                          <td>'.$rowgroupdetail->NoKTP.'</td>                                        
+                                        </tr>
+                                        <tr>            
+                                              <td></td>    
+                                              <td colspan="7">Alamat KTP : Pinang Ranti RT 002, RW 002, Kel. Pinang Ranti, Kec. Makasar, Jakarta Timur, DKI Jakarta</td>
+                                              <td colspan="6">Alamat NPWP : Sama dengan KTP</td>
+                                        </tr>';     
 
                     } //tutup foreach querygroupdetail    
 
@@ -989,13 +985,13 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                           <td>'.$no.'</td>
                                           <td>'.$rowgroupdetail->nik.'</td>
                                           <td>'.$rowgroupdetail->nama.'</td>
-                                          <td>'.$rowgroupdetail->lamakontrak.'</td>
-                                          <td>'.$rowgroupdetail->sex.'</td>
-                                          <td>'.$rowgroupdetail->bandskrg.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->lamakontrak.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->sex.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->bandskrg.'</td>
                                           <td>'.$rowgroupdetail->JobFungsionalName.'</td>                                          
                                           <td>'.$rowgroupdetail->divdept.'</td>
-                                          <td>'.$this->date_format_txt($rowgroupdetail->startkontrak).'</td>
-                                          <td>'.$this->date_format_txt($rowgroupdetail->endkontrak).'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->startkontrak).'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->endkontrak).'</td>
                                           <td></td>                                          
                                       </tr>';     
 
@@ -1040,9 +1036,9 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                           <td>'.$rowgroupdetail->nik.'</td>
                                           <td>'.$rowgroupdetail->nama.'</td>
                                           <td>'.$rowgroupdetail->JobFungsionalName.'</td>                                          
-                                          <td>'.$rowgroupdetail->bandskrg.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->bandskrg.'</td>
                                           <td>'.$rowgroupdetail->divdept.'</td>                                          
-                                          <td>'.$this->date_format_txt($rowgroupdetail->endkontrak).'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->endkontrak).'</td>
                                           <td></td>                                          
                                       </tr>';     
 
@@ -1088,9 +1084,9 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                           <td>'.$rowgroupdetail->nik.'</td>
                                           <td>'.$rowgroupdetail->nama.'</td>
                                           <td>'.$rowgroupdetail->JobFungsionalName.'</td>                                          
-                                          <td>'.$rowgroupdetail->bandskrg.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->bandskrg.'</td>
                                           <td>'.$rowgroupdetail->divdept.'</td>                                          
-                                          <td>'.$this->date_format_txt($rowgroupdetail->endkontrak).'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->endkontrak).'</td>
                                           <td></td>                                          
                                       </tr>';     
 
@@ -1168,10 +1164,10 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                           <td>'.$rowgroupdetail->nik.'</td>
                                           <td>'.$rowgroupdetail->nama.'</td>
                                           <td>'.$rowgroupdetail->JobFungsionalName.'</td>                                          
-                                          <td>'.$rowgroupdetail->bandskrg.'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->bandskrg.'</td>
                                           <td>'.$rowgroupdetail->divdept.'</td>                                          
-                                          <td>'.$this->date_format_txt($rowgroupdetail->akhirresign).'</td>
-                                          <td>'.$this->date_format_txt($rowgroupdetail->tglkeluar).'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->akhirresign).'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->tglkeluar).'</td>
                                           <td></td>                                          
                                       </tr>';     
 
@@ -1202,7 +1198,7 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
              // KARYAWAN MASUK ========================================================================================================================
              $scrgroup = "SELECT CompanyID,cCompanyName FROM ( ".$scr." ) a GROUP BY cCompanyName";
              $querygroup = $this->db->query($scrgroup);   
-             $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td><h4><u>PESERTA MASUK</u></h4></td></tr></table>'; 
+             $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td colspan="9"><h4><u>PESERTA MASUK</u></h4></td></tr></table>'; 
              foreach ($querygroup->result() as $rowgroup) {
                 $headerpttitle = $rowgroup->cCompanyName;
                 $headerptid    = $rowgroup->CompanyID;
@@ -1226,14 +1222,14 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                       <thead>
                                           <tr>
                                               <th>NO</th>
-                                              <th>NIK</th>
-                                              <th>NAMA</th>
-                                              <th>BAND</th>
-                                              <th>TGL LAHIR</th>
-                                              <th>DIVISI/DIREKTORAT</th>
-                                              <th>DEPARTMENT</th>
+                                              <th style="width:50px;">NIK</th>
+                                              <th style="width:150px;">NAMA</th>
+                                              <th style="width:10px;">BAND</th>
+                                              <th style="width:80px;">TGL LAHIR</th>
+                                              <th style="width:250px;">DIVISI/DIREKTORAT</th>
+                                              <th style="width:250px;">DEPARTMENT</th>
                                               <th>JK</th>
-                                              <th>HUBUNGAN KELUAGA</th>
+                                              <th>HUBUNGAN KELUARGA</th>
                                               <th>KETERANGAN</th>
                                           </tr>
                                       </thead>
@@ -1245,11 +1241,11 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                           <td>'.$no.'</td>
                                           <td>'.$rowgroupdetail->nik.'</td>
                                           <td>'.$rowgroupdetail->nama.'</td>
-                                          <td>'.$rowgroupdetail->bandskrg.'</td>
-                                          <td>'.$this->date_format_txt($rowgroupdetail->tgllahir).'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->bandskrg.'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->tgllahir).'</td>
                                           <td>'.$rowgroupdetail->divisi.'</td>
                                           <td>'.$rowgroupdetail->dept.'</td>
-                                          <td>'.$rowgroupdetail->sex.'</td>                                          
+                                          <td style="text-align: center">'.$rowgroupdetail->sex.'</td>                                          
                                           <td style="text-align:center"> - </td>
                                           <td></td>                                          
                                       </tr>';     
@@ -1269,7 +1265,7 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
              // PESERTA KELUAR ========================================================================================================================
              $scrgroup = "SELECT CompanyID,cCompanyName FROM ( ".$scr." ) a GROUP BY cCompanyName";
              $querygroup = $this->db->query($scrgroup);   
-             $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td><h4><u>PESERTA KELUAR</u></h4></td></tr></table>'; 
+             $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td colspan="9" style="width: 100%;text-align:center;"><h4><u>PESERTA KELUAR</u></h4></td></tr></table>'; 
              foreach ($querygroup->result() as $rowgroup) {
                 $headerpttitle = $rowgroup->cCompanyName;
                 $headerptid    = $rowgroup->CompanyID;
@@ -1291,14 +1287,14 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                       <thead>
                                           <tr>
                                               <th style="width:2%;">NO</th>
-                                              <th style="width:5%;">NIK</th>
-                                              <th style="width:10%;">NAMA</th>
-                                              <th style="width:3%;">BAND</th>
-                                              <th style="width:7%;">TGL LAHIR</th>
-                                              <th style="width:20%;">DIVISI/DIREKTORAT</th>
-                                              <th style="width:20%;">DEPARTMENT</th>
+                                              <th style="width:50px;">NIK</th>
+                                              <th style="width:150px;">NAMA</th>
+                                              <th style="width:10px;">BAND</th>
+                                              <th style="width:80px;">TGL LAHIR</th>
+                                              <th style="width:250px;">DIVISI/DIREKTORAT</th>
+                                              <th style="width:250px;">DEPARTMENT</th>
                                               <th style="width:5%;">JK</th>
-                                              <th style="width:5%;">HUBUNGAN KELUAGA</th>
+                                              <th style="width:5%;">HUBUNGAN KELUARGA</th>
                                               <th>KETERANGAN</th>
                                           </tr>
                                       </thead>
@@ -1310,11 +1306,11 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                           <td>'.$no.'</td>
                                           <td>'.$rowgroupdetail->nik.'</td>
                                           <td>'.$rowgroupdetail->nama.'</td>
-                                          <td>'.$rowgroupdetail->bandskrg.'</td>
-                                          <td>'.$this->date_format_txt($rowgroupdetail->tgllahir).'</td>
+                                          <td style="text-align: center">'.$rowgroupdetail->bandskrg.'</td>
+                                          <td style="text-align: center">'.$this->date_format_txt($rowgroupdetail->tgllahir).'</td>
                                           <td>'.$rowgroupdetail->divisi.'</td>
                                           <td>'.$rowgroupdetail->dept.'</td>
-                                          <td>'.$rowgroupdetail->sex.'</td>                                          
+                                          <td style="text-align: center">'.$rowgroupdetail->sex.'</td>                                          
                                           <td style="text-align:center"> - </td>
                                           <td></td>                                          
                                       </tr>';     
@@ -1349,7 +1345,7 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
         if($jenis=="inout"){
              $scrgroup = "SELECT CompanyID,cCompanyName FROM ( ".$scr." ) a GROUP BY cCompanyName";
              $querygroup = $this->db->query($scrgroup); 
-             $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td><h4><u>PESERTA MASUK</u></h4></td></tr></table>';   
+             $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td style="width: 100%;text-align:center;" colspan="16"><h4><u>PESERTA MASUK</u></h4></td></tr></table>';   
              foreach ($querygroup->result() as $rowgroup) {
                 $headerpttitle = $rowgroup->cCompanyName;
                 $headerptid    = $rowgroup->CompanyID;
@@ -1414,7 +1410,7 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                                           <td>'.$rowgroupdetail->bloodtype.'</td>
                                           <td>'.$rowgroupdetail->agama_name.'</td>
                                           <td>'.$rowgroupdetail->NoKTP.'</td>
-                                          <td>'.$rowgroupdetail->nonpwp.'</td>
+                                          <td>'.$this->npwp_format_txt($rowgroupdetail->nonpwp).'</td>
                                           <td>'.$rowgroupdetail->NoBpjsLama.'</td>
                                           <td>'.$rowgroupdetail->BpjsPensiun.'</td>
                                       </tr>
@@ -1517,7 +1513,7 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
              //======================================== PESERTA KELUAR =======================================================================
              $scrgroup = "SELECT CompanyID,cCompanyName FROM ( ".$scr." ) a WHERE (DATE_FORMAT(DATE_ADD('".$blnprosesstr."',INTERVAL -1 MONTH),'%m%Y') = DATE_FORMAT(tglkeluar,'%m%Y')) GROUP BY cCompanyName";
              $querygroup = $this->db->query($scrgroup); 
-             $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td><h4><u>PESERTA KELUAR</u></h4></td></tr></table>';    
+             $htmldetail .= '<table style="width: 100%;text-align: center;font-weight: bold;"><tr><td colspan="16"><h4><u>PESERTA KELUAR</u></h4></td></tr></table>';    
              $htmldetail .= '<table class="ReportTable" id="datareport">
                                   <thead>
                                       <tr>
@@ -1590,6 +1586,20 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
             $date = '';
         }
         return $date;
+    }
+
+    function npwp_format_txt($value){
+        $value = str_replace("-","",$value);
+        if (!is_null($value) && !empty($value)){
+            if(strlen($value)==15){
+               $npwp = substr($value,0,2).".".substr($value,2,3).".".substr($value,5,3).".".substr($value,8,1)."-".substr($value,9,3).".".substr($value,12,3);     
+            } else {
+               $npwp = $value;
+            }            
+        }else{
+            $npwp = '';
+        }
+        return $npwp;
     }
 
     public function get_bulan_proses()
@@ -1670,7 +1680,7 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
                               <td>'.$this->date_format_txt($wifetgllahir).'</td>
                               <td>'.$wifeusia.'</td>
                               <td>'.$wifesex.'</td>
-                              <td rowspan="4" colspan="8"></td>  
+                              <td rowspan="4" colspan="7"></td>  
                             </tr>';
 
 
@@ -1737,11 +1747,46 @@ class report_IX_karyawan_in_out extends CMS_Priv_Strict_Controller {
 
 
 
-    public function loaddata_payroll_inout_excell($jenis,$blnproses){
-        $output = $this->loaddata_payroll_inout($jenis,$blnproses);
-        $this->view($this->cms_module_path().'/report_IX_karyawan_in_out_view', $output,
+    public function loaddata_payroll_inout_excell(){
+        $jenis        = $this->input->get('jenis');
+        $blnproses    = $this->input->get('blnproses');
+        $data['htmldata'] = $this->loaddata_payroll_inout($jenis,$blnproses);
+        $data['namaexcell'] = 'Laporan_In_OUt_Payroll';
+
+        $this->load->view('report_IX_excell_view',$data);
+        /*
+        $this->view($this->cms_module_path().'/report_IX_excell_view', $output,
         $this->cms_complete_navigation_name('report_IX_karyawan_in_out'));
+        */
     }
+
+    public function loaddata_bpjskes_inout_excell(){
+        $jenis        = $this->input->get('jenis');
+        $blnproses    = $this->input->get('blnproses');
+        $data['htmldata'] = $this->loaddata_bpjskes_inout($jenis,$blnproses);
+        $data['namaexcell'] = 'Laporan_In_Out_BPJS_Kes';
+
+        $this->load->view('report_IX_excell_view',$data);
+        /*
+        $this->view($this->cms_module_path().'/report_IX_excell_view', $output,
+        $this->cms_complete_navigation_name('report_IX_karyawan_in_out'));
+        */
+    }
+
+    public function loaddata_bpjstk_inout_excell(){
+        $jenis        = $this->input->get('jenis');
+        $blnproses    = $this->input->get('blnproses');
+        $data['htmldata'] = $this->loaddata_bpjstk_inout($jenis,$blnproses);
+        $data['namaexcell'] = 'Laporan_In_Out_BPJS_Ketenaga_Kerjaan';
+
+        $this->load->view('report_IX_excell_view',$data);
+        /*
+        $this->view($this->cms_module_path().'/report_IX_excell_view', $output,
+        $this->cms_complete_navigation_name('report_IX_karyawan_in_out'));
+        */
+    }
+
+
 
 
 

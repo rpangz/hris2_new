@@ -915,7 +915,7 @@ class employee extends CMS_Priv_Strict_Controller {
     public function _callback_duplicate_row($nik_lama, $nik_baru){
 
         $this->db->select('NIK,Nama,Email')
-                 ->from($this->tbl_profile)
+                 ->from('tbl_profile')
                  ->where('NIK', $nik_baru);
         $db = $this->db->get();
         $data = $db->row(0);
